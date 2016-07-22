@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\FacilisContext.cs" />
+    <Compile Include="EntityConfig\CidadeConfiguration.cs" />
+    <Compile Include="EntityConfig\EstadoConfiguration.cs" />
     <Compile Include="EntityConfig\UsuarioConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

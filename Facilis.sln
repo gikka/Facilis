@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilis.Application", "Faci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilis.MVC", "Facilis.MVC\Facilis.MVC.csproj", "{B9F00AEC-F02E-4147-A33B-9C82CCF114B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilis.Infra.CrossCutting.Identity", "Facilis.Infra.CrossCutting.Identity\Facilis.Infra.CrossCutting.Identity.csproj", "{50BF9597-0BEC-471E-AFAB-636D06C2317A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{B9F00AEC-F02E-4147-A33B-9C82CCF114B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9F00AEC-F02E-4147-A33B-9C82CCF114B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9F00AEC-F02E-4147-A33B-9C82CCF114B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BF9597-0BEC-471E-AFAB-636D06C2317A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BF9597-0BEC-471E-AFAB-636D06C2317A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BF9597-0BEC-471E-AFAB-636D06C2317A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BF9597-0BEC-471E-AFAB-636D06C2317A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +71,6 @@ Global
 		{2B8A4EF8-21B7-41FB-B0AB-4C392C33F94A} = {5938D691-5171-4990-A746-DFA116924E4D}
 		{616D3F3F-29A3-4106-8587-420FCAACABE1} = {07B6486B-3777-4BEE-AF77-D286E57F1B73}
 		{B9F00AEC-F02E-4147-A33B-9C82CCF114B5} = {49A81A6B-382B-47EB-9A25-010518E88F3D}
+		{50BF9597-0BEC-471E-AFAB-636D06C2317A} = {5E19F866-DBCE-44C4-B543-C787C809D4D0}
 	EndGlobalSection
 EndGlobal

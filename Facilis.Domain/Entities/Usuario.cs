@@ -19,5 +19,6 @@ namespace Facilis.Domain.Entities
         public string Bairro { get; set; }
         public int CidadeId { get; set; }
         public virtual Cidade Cidade { get; set; }
+
     }
 }
