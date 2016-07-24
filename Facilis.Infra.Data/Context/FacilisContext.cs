@@ -34,7 +34,6 @@ namespace Facilis.Infra.Data.Context
 
             modelBuilder.Configurations.Add(new CidadeConfiguration());
             modelBuilder.Configurations.Add(new EstadoConfiguration());
-
             
         }
 

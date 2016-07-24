@@ -52,9 +52,9 @@ namespace Facilis.Infra.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(50);
 
-            HasRequired(u => u.Cidade)
-                .WithMany()
-                .HasForeignKey(u => u.CidadeId);
+            //HasRequired(u => u.Cidade)
+            //    .WithMany()
+            //    .HasForeignKey(u => u.CidadeId);
 
         }
     }

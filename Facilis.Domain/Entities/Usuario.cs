@@ -4,7 +4,12 @@ namespace Facilis.Domain.Entities
 {
     public class Usuario
     {
-        public int Id { get; set; }
+        public Usuario()
+        {
+            Id = Guid.NewGuid().ToString();
+
+        }
+        public string Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Email { get; set; }
@@ -17,8 +22,8 @@ namespace Facilis.Domain.Entities
         public int Cep { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
-        public int CidadeId { get; set; }
-        public virtual Cidade Cidade { get; set; }
+        //public int CidadeId { get; set; }
+        //public virtual Cidade Cidade { get; set; }
 
     }
 }
