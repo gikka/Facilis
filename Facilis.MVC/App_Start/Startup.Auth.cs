@@ -1,4 +1,6 @@
-﻿using Facilis.Infra.CrossCutting.Identity.Configuration;
+﻿using System;
+using System.Web.Mvc;
+using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -6,8 +8,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
-using System;
-using System.Web.Mvc;
 
 namespace Facilis.MVC
 {
@@ -67,5 +67,4 @@ namespace Facilis.MVC
             //});
         }
     }
-
 }

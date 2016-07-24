@@ -34,8 +34,14 @@
     <Compile Include="Configuration\ApplicationUserManager.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
+    <Compile Include="Model\ChangePasswordViewModel.cs" />
+    <Compile Include="Model\FactorViewModel.cs" />
+    <Compile Include="Model\ForgotPasswordViewModel.cs" />
+    <Compile Include="Model\ForgotViewModel.cs" />
     <Compile Include="Model\LoginViewModel.cs" />
     <Compile Include="Model\RegisterViewModel.cs" />
+    <Compile Include="Model\ResetPasswordViewModel.cs" />
+    <Compile Include="Model\SetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
