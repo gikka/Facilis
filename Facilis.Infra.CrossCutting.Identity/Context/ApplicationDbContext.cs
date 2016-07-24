@@ -2,6 +2,8 @@
 using Facilis.Domain.Entities;
 using Facilis.Infra.Data.EntityConfig;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Facilis.Infra.CrossCutting.Identity.Model;
 
 namespace Facilis.Infra.CrossCutting.Identity.Context
 {
@@ -33,6 +35,18 @@ namespace Facilis.Infra.CrossCutting.Identity.Context
             modelBuilder.Configurations.Add(new UsuarioConfiguration());
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUser>()
+                .ToTable("Usuarios")
+                .Property(p => p.Id)
+                .HasColumnName("Id");
+
+            modelBuilder.Entity<ApplicationUser>()
+                .ToTable("Usuarios")
+                .Property(p => p.Id)
+                .HasColumnName("Id");
+
+
         }
     }
 }

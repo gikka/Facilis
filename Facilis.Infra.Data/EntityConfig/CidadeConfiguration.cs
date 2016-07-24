@@ -1,4 +1,5 @@
 ﻿using Facilis.Domain.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Facilis.Infra.Data.Repositories.EntityConfig
@@ -7,7 +8,10 @@ namespace Facilis.Infra.Data.Repositories.EntityConfig
     {
         public CidadeConfiguration()
         {
-            HasKey(c => c.Id);
+            HasKey(c => c.CidadeId);
+
+            Property(c => c.CidadeId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             Property(c => c.Nome)
                 .IsRequired()
@@ -16,6 +20,8 @@ namespace Facilis.Infra.Data.Repositories.EntityConfig
             HasRequired(c => c.Estado)
                 .WithMany()
                 .HasForeignKey(c => c.EstadoId);
+
+ 
         }
     }
 }

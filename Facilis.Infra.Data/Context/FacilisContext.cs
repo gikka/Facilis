@@ -1,4 +1,5 @@
 ﻿using Facilis.Domain.Entities;
+using Facilis.Infra.Data.Repositories.EntityConfig;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -22,7 +23,7 @@ namespace Facilis.Infra.Data.Context
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Properties()
-                .Where(p => p.Name == "Id")
+                .Where(p => p.Name == p.ReflectedType.Name + "Id")
                 .Configure(p => p.IsKey());
 
             modelBuilder.Properties<string>()
@@ -31,8 +32,8 @@ namespace Facilis.Infra.Data.Context
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
 
-            //modelBuilder.Configurations.Add(new CidadeConfiguration());
-            //modelBuilder.Configurations.Add(new EstadoConfiguration());
+            modelBuilder.Configurations.Add(new CidadeConfiguration());
+            modelBuilder.Configurations.Add(new EstadoConfiguration());
 
             
         }

@@ -1,5 +1,6 @@
 ﻿using Facilis.Domain.Entities;
 using System.Data.Entity.ModelConfiguration;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Facilis.Infra.Data.Repositories.EntityConfig
 {
@@ -7,8 +8,11 @@ namespace Facilis.Infra.Data.Repositories.EntityConfig
     {
         public EstadoConfiguration()
         {
-            HasKey(e => e.Id);
+            HasKey(e => e.EstadoId);
 
+            Property(e => e.EstadoId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                
             Property(e => e.Nome)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -16,6 +20,7 @@ namespace Facilis.Infra.Data.Repositories.EntityConfig
             Property(e => e.Sigla)
                 .IsRequired()
                 .HasMaxLength(2);
+
         }
     }
 }
