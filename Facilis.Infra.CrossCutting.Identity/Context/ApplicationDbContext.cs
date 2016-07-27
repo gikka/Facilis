@@ -5,17 +5,18 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using System;
+using Facilis.Infra.CrossCutting.Identity.Configuration;
 
 namespace Facilis.Infra.CrossCutting.Identity.Context
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IDisposable
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>, IDisposable
     {
         public ApplicationDbContext()
          : base("Facilis")
         {
         }
 
-        public DbSet<Usuario> Usuarios { get; set; }
+        //public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,7 +36,8 @@ namespace Facilis.Infra.CrossCutting.Identity.Context
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
 
-            modelBuilder.Configurations.Add(new UsuarioConfiguration());
+            //modelBuilder.Configurations.Add(new UsuarioConfiguration());
+            modelBuilder.Configurations.Add(new ConfiguracaoUsuarioTeste());
 
             modelBuilder.Entity<IdentityUser>()
                 .ToTable("Usuario")

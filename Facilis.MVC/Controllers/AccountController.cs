@@ -79,7 +79,12 @@ namespace Facilis.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                    Bairro = model.Bairro, Cep = model.Cep, Complemento = model.Complemento,
+                    DataNascimento = model.DataNascimento, Endereco = model.Endereco, Nome = model.Nome,
+                    Numero = model.Numero, Senha = model.Senha, Sexo = model.Sexo, Telefone = model.Telefone,
+                    Sobrenome = model.Sobrenome
+                };
                 var result = await _userManager.CreateAsync(user, model.Senha);
                 if (result.Succeeded)
                 {
@@ -88,6 +93,7 @@ namespace Facilis.MVC.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+
             }
 
             // If we got this far, something failed, redisplay form
