@@ -37,7 +37,7 @@ namespace Facilis.Infra.CrossCutting.Identity.Context
                 .Configure(p => p.HasMaxLength(100));
 
             //modelBuilder.Configurations.Add(new UsuarioConfiguration());
-            modelBuilder.Configurations.Add(new ConfiguracaoUsuarioTeste());
+            modelBuilder.Configurations.Add(new Configuration.UsuarioConfiguration());
 
             modelBuilder.Entity<IdentityUser>()
                 .ToTable("Usuario")

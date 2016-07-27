@@ -19,7 +19,7 @@ namespace Facilis.Infra.CrossCutting.Identity.Model
         public string Sobrenome { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo E-mail")]
-        [MaxLength(50, ErrorMessage = "Máximo {0} caracteres")]
+        [MaxLength(256, ErrorMessage = "Máximo {0} caracteres")]
         [EmailAddress(ErrorMessage = "Preencha um e-mail válido")]
         [Display(Name = "E-mail")]
         public string Email { get; set; }

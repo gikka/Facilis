@@ -1,4 +1,4 @@
-﻿//using Facilis.Domain.Interfaces.Repository;
+﻿using Facilis.Domain.Interfaces.Repositories;
 using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Context;
 using Facilis.Infra.CrossCutting.Identity.Model;
@@ -20,7 +20,7 @@ namespace Facilis.Infra.CrossCutting.IoC
             container.RegisterPerWebRequest<ApplicationUserManager>();
             container.RegisterPerWebRequest<ApplicationSignInManager>();
 
-            //container.RegisterPerWebRequest<IUsuarioRepository, UsuarioRepository>();
+            container.RegisterPerWebRequest<IEventoRepository, EventoRepository>();
         }
     }
 }

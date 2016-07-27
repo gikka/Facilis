@@ -82,7 +82,7 @@ namespace Facilis.MVC.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
                     Bairro = model.Bairro, Cep = model.Cep, Complemento = model.Complemento,
                     DataNascimento = model.DataNascimento, Endereco = model.Endereco, Nome = model.Nome,
-                    Numero = model.Numero, Senha = model.Senha, Sexo = model.Sexo, Telefone = model.Telefone,
+                    Numero = model.Numero, Sexo = model.Sexo, Telefone = model.Telefone,
                     Sobrenome = model.Sobrenome
                 };
                 var result = await _userManager.CreateAsync(user, model.Senha);

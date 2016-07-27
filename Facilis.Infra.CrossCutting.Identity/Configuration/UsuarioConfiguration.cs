@@ -1,9 +1,11 @@
 ﻿using Facilis.Domain.Entities;
+using Facilis.Infra.CrossCutting.Identity.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Facilis.Infra.Data.EntityConfig
+namespace Facilis.Infra.CrossCutting.Identity.Configuration
 {
-    public class UsuarioConfiguration : EntityTypeConfiguration<Usuario>
+    public class UsuarioConfiguration : EntityTypeConfiguration<ApplicationUser>
     {
         public UsuarioConfiguration()
         {
@@ -18,11 +20,7 @@ namespace Facilis.Infra.Data.EntityConfig
 
             Property(u => u.Email)
                 .IsRequired()
-                .HasMaxLength(50);
-
-            Property(u => u.Senha)
-                .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(256);
 
             Property(u => u.DataNascimento)
                 .IsRequired();

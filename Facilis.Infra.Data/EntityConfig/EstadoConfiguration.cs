@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Facilis.Infra.Data.Repositories.EntityConfig
+namespace Facilis.Infra.Data.EntityConfig
 {
     public class EstadoConfiguration : EntityTypeConfiguration<Estado>
     {
