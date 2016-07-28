@@ -140,6 +140,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Facilis.Application\Facilis.Application.csproj">
+      <Project>{616d3f3f-29a3-4106-8587-420fcaacabe1}</Project>
+      <Name>Facilis.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Facilis.Domain\Facilis.Domain.csproj">
       <Project>{2b8a4ef8-21b7-41fb-b0ab-4c392c33f94a}</Project>
       <Name>Facilis.Domain</Name>
