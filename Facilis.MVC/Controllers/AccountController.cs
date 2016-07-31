@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Facilis.Application.Interface;
-using System.Collections.Generic;
 
 namespace Facilis.MVC.Controllers
 {
@@ -74,8 +73,7 @@ namespace Facilis.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll(), "EstadoId", "Nome");
-            // ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(11), "CidadeId", "Nome");
+            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome");
             ViewBag.CidadeId = new SelectList(string.Empty , "CidadeId", "Nome");
             return View();
         }
@@ -106,12 +104,15 @@ namespace Facilis.MVC.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ViewBag.EstadoId = new SelectList(_estadoApp.GetAll(), "EstadoId", "Nome", model.EstadoId);
-                //ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId), "CidadeId", "Nome", model.CidadeId);
+                ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
+                ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
                 AddErrors(result);
 
 
             }
+
+            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
+            ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
 
             // If we got this far, something failed, redisplay form
             return View(model);

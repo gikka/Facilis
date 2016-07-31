@@ -1,11 +1,9 @@
-﻿using System.Data.Entity;
-using Facilis.Domain.Entities;
-using Facilis.Infra.Data.EntityConfig;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Facilis.Infra.CrossCutting.Identity.Model;
-using System;
+﻿using Facilis.Domain.Entities;
 using Facilis.Infra.CrossCutting.Identity.Configuration;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Facilis.Infra.CrossCutting.Identity.Context
 {
@@ -16,56 +14,59 @@ namespace Facilis.Infra.CrossCutting.Identity.Context
         {
         }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        //public DbSet<Usuario> Usuarios { get; set; }
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //public static ApplicationDbContext Create()
         //{
-        //  base.OnModelCreating(modelBuilder);
+        //    return new ApplicationDbContext();
+        //}
 
-        //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        public DbSet<Estado> Estados { get; set; }
+        public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
 
-        //modelBuilder.Properties()
-        //    .Where(p => p.Name == "Id")
-        //    .Configure(p => p.IsKey());
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //modelBuilder.Properties<string>()
-        //    .Configure(p => p.HasColumnType("varchar"));
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
-        //modelBuilder.Properties<string>()
-        //    .Configure(p => p.HasMaxLength(100));
+            //modelBuilder.Properties()
+            //    .Where(p => p.Name == "Id")
+            //    .Configure(p => p.IsKey());
 
-        //modelBuilder.Configurations.Add(new UsuarioConfiguration());
-        //modelBuilder.Configurations.Add(new Configuration.UsuarioConfiguration());
+            modelBuilder.Properties<string>()
+                .Configure(p => p.HasColumnType("varchar"));
 
-        //modelBuilder.Entity<IdentityUser>()
-        //    .ToTable("Usuario")
-        //    .Property(p => p.Id)
-        //    .HasColumnName("Id");
+            modelBuilder.Properties<string>()
+                .Configure(p => p.HasMaxLength(100));
 
-        //modelBuilder.Entity<ApplicationUser>()
-        //    .ToTable("Usuario")
-        //    .Property(p => p.Id)
-        //    .HasColumnName("Id");
+            modelBuilder.Configurations.Add(new UsuarioConfiguration());
+            //modelBuilder.Configurations.Add(new Configuration.UsuarioConfiguration());
 
-        //modelBuilder.Entity<IdentityUserRole>()
-        //    .ToTable("UsuariosRole");
+            //modelBuilder.Entity<IdentityUser>()
+            //    .ToTable("Usuario")
+            //    .Property(p => p.Id)
+            //    .HasColumnName("Id");
 
-        //modelBuilder.Entity<IdentityUserLogin>()
-        //    .ToTable("Logins");
+            //modelBuilder.Entity<ApplicationUser>()
+            //    .ToTable("Usuario")
+            //    .Property(p => p.Id)
+            //    .HasColumnName("Id");
 
-        //modelBuilder.Entity<IdentityUserClaim>()
-        //    .ToTable("Claims");
+            //modelBuilder.Entity<IdentityUserRole>()
+            //    .ToTable("UsuariosRole");
 
-        //modelBuilder.Entity<IdentityRole>()
-        //    .ToTable("Roles");
+            //modelBuilder.Entity<IdentityUserLogin>()
+            //    .ToTable("Logins");
 
-        //        }
+            //modelBuilder.Entity<IdentityUserClaim>()
+            //    .ToTable("Claims");
+
+            //modelBuilder.Entity<IdentityRole>()
+            //    .ToTable("Roles");
+
+        }
     }
 }
