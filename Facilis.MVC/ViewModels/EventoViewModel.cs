@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facilis.Infra.CrossCutting.Identity.Model;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Facilis.MVC.ViewModels
@@ -60,5 +61,8 @@ namespace Facilis.MVC.ViewModels
         [MinLength(2, ErrorMessage = "Mínimo {0} caracteres")]
         [DataType(DataType.MultilineText)]
         public string Descricao { get; set; }
+
+        public string UsuarioId { get; set; }
+        public virtual RegisterViewModel Usuario { get; set; }
     }
 }

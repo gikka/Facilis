@@ -27,6 +27,14 @@ namespace Facilis.Infra.CrossCutting.IoC
             container.RegisterPerWebRequest<IEventoAppService, EventoAppService>();
             container.RegisterPerWebRequest<IEventoService, EventoService>();
             container.RegisterPerWebRequest<IEventoRepository, EventoRepository>();
+
+            container.RegisterPerWebRequest<IEstadoAppService, EstadoAppService>();
+            container.RegisterPerWebRequest<IEstadoService, EstadoService>();
+            container.RegisterPerWebRequest<IEstadoRepository, EstadoRepository>();
+
+            container.RegisterPerWebRequest<ICidadeAppService, CidadeAppService>();
+            container.RegisterPerWebRequest<ICidadeService, CidadeService>();
+            container.RegisterPerWebRequest<ICidadeRepository, CidadeRepository>();
         }
     }
 }

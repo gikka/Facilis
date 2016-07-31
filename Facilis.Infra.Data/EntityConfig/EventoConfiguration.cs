@@ -43,6 +43,10 @@ namespace Facilis.Infra.Data.EntityConfig
             Property(e => e.TipoEvento)
                 .IsRequired();
 
+            HasRequired(e => e.Usuario)
+                .WithMany()
+                .HasForeignKey(e => e.UsuarioId);
+
         }
     }
 }

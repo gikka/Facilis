@@ -54,8 +54,11 @@
     <Compile Include="EntityConfig\CidadeConfiguration.cs" />
     <Compile Include="EntityConfig\EstadoConfiguration.cs" />
     <Compile Include="EntityConfig\EventoConfiguration.cs" />
+    <Compile Include="EntityConfig\UsuarioConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CidadeRepository.cs" />
+    <Compile Include="Repositories\EstadoRepository.cs" />
     <Compile Include="Repositories\EventoRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
   </ItemGroup>

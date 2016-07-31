@@ -15,5 +15,7 @@ namespace Facilis.Domain.Entities
         public string EmailPalestrante { get; set; }
         public int TipoEvento { get; set; }
         public string Descricao { get; set; }
+        public string UsuarioId { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

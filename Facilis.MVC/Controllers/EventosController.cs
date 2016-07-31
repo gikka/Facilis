@@ -40,6 +40,7 @@ namespace Facilis.MVC.Controllers
 
         // POST: Evento/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(EventoViewModel evento)
         {
             if (ModelState.IsValid)

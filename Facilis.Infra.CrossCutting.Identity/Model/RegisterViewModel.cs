@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Facilis.Domain.Entities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Facilis.Infra.CrossCutting.Identity.Model
@@ -72,8 +74,15 @@ namespace Facilis.Infra.CrossCutting.Identity.Model
         [MaxLength(50, ErrorMessage = "Máximo {0} caracteres")]
         public string Bairro { get; set; }
 
-        public int CidadeId { get; set; }
-        //public virtual Cidade Cidade { get; set; }
+        [Required(ErrorMessage = "Preencha o campo Estado")]
+        [Display(Name = "Estado")]
+        public int EstadoId { get; set; }
+        public virtual Estado Estado { get; set; }
 
+        [Required(ErrorMessage = "Preencha o campo Cidade")]
+        [Display(Name = "Cidade")]
+        public int CidadeId { get; set; }
+        public virtual Cidade Cidade { get; set; }
+        public virtual IEnumerable<Evento> Eventos { get; set; }
     }
 }

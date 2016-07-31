@@ -7,6 +7,8 @@ using Facilis.Infra.CrossCutting.Identity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Facilis.Application.Interface;
+using System.Collections.Generic;
 
 namespace Facilis.MVC.Controllers
 {
@@ -16,10 +18,15 @@ namespace Facilis.MVC.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        private readonly IEstadoAppService _estadoApp;
+        private readonly ICidadeAppService _cidadeApp;
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEstadoAppService estadoApp, ICidadeAppService cidadeApp)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _estadoApp = estadoApp;
+            _cidadeApp = cidadeApp;
         }
 
 
@@ -67,6 +74,9 @@ namespace Facilis.MVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll(), "EstadoId", "Nome");
+            // ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(11), "CidadeId", "Nome");
+            ViewBag.CidadeId = new SelectList(string.Empty , "CidadeId", "Nome");
             return View();
         }
 
@@ -79,20 +89,27 @@ namespace Facilis.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                    Bairro = model.Bairro, Cep = model.Cep, Complemento = model.Complemento,
-                    DataNascimento = model.DataNascimento, Endereco = model.Endereco, Nome = model.Nome,
-                    Numero = model.Numero, Sexo = model.Sexo, Telefone = model.Telefone,
-                    Sobrenome = model.Sobrenome
-                };
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                //    Bairro = model.Bairro, Cep = model.Cep, Complemento = model.Complemento,
+                //    DataNascimento = model.DataNascimento, Endereco = model.Endereco, Nome = model.Nome,
+                //    Numero = model.Numero, Sexo = model.Sexo, Telefone = model.Telefone,
+                //    Sobrenome = model.Sobrenome
+                //};
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Senha);
+
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");
                 }
+
+                ViewBag.EstadoId = new SelectList(_estadoApp.GetAll(), "EstadoId", "Nome", model.EstadoId);
+                //ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId), "CidadeId", "Nome", model.CidadeId);
                 AddErrors(result);
+
 
             }
 
@@ -285,7 +302,11 @@ namespace Facilis.MVC.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+
         }
+
+        [AllowAnonymous]
+        public ActionResult ListarCidadesPorEstado(int estadoId) => Json(_cidadeApp.ListarPorEstado(estadoId).ToList(), JsonRequestBehavior.AllowGet);
         #endregion
     }
 }

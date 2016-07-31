@@ -35,11 +35,17 @@
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\Evento.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Interfaces\Repositories\ICidadeRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEstadoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEventoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\Services\ICidadeService.cs" />
+    <Compile Include="Interfaces\Services\IEstadoService.cs" />
     <Compile Include="Interfaces\Services\IEventoService.cs" />
     <Compile Include="Interfaces\Services\IServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CidadeService.cs" />
+    <Compile Include="Services\EstadoService.cs" />
     <Compile Include="Services\EventoService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
   </ItemGroup>

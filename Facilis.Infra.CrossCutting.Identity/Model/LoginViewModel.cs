@@ -16,5 +16,6 @@ namespace Facilis.Infra.CrossCutting.Identity.Model
         
         [Display(Name = "Lembrar-me")]
         public bool RememberMe { get; set; }
+
     }
 }

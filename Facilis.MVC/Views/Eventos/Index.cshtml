@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.EventoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInicial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraInicial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraFinal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantidadeVagas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomePalestrante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailPalestrante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoEvento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInicial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraInicial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraFinal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantidadeVagas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomePalestrante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailPalestrante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoEvento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EventoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EventoId })
+        </td>
+    </tr>
+}
+
+</table>

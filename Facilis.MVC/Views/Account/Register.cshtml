@@ -6,10 +6,10 @@
 
 <h2>Register</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>RegisterViewModel</h4>
         <hr />
@@ -117,11 +117,17 @@
                 @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.EstadoId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EstadoId", String.Empty)
+                @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.CidadeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CidadeId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("CidadeId", String.Empty)
                 @Html.ValidationMessageFor(model => model.CidadeId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -137,3 +143,26 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#EstadoId").change(function () {
+            var estadoId = $(this).val()
+            if (estadoId > 0) {
+                listaCidades($(this).val());
+            }
+        });
+    });
+
+    function listaCidades(estadoId) {
+        $.getJSON('@Url.Action("ListarCidadesPorEstado")?estadoId=' + estadoId, listaCidadesCallBack);
+    }
+
+    function listaCidadesCallBack(json) {
+        $("#CidadeId :gt(0)").remove();
+        $(json).each(function () {
+            $("#CidadeId").append("<option value='" + this.CidadeId + "'>" + this.Nome + "</option>");
+        });
+    }
+
+</script>

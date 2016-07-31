@@ -15,6 +15,7 @@ namespace Facilis.Infra.Data.Context
 
         public DbSet<Estado> Estados { get; set; }
         public DbSet<Cidade> Cidades { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Evento> Eventos { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,10 +32,11 @@ namespace Facilis.Infra.Data.Context
                 .Configure(p => p.HasColumnType("varchar"));
 
             modelBuilder.Properties<string>()
-                .Configure(p => p.HasMaxLength(100));
+                .Configure(p => p.HasMaxLength(128));
 
             modelBuilder.Configurations.Add(new CidadeConfiguration());
             modelBuilder.Configurations.Add(new EstadoConfiguration());
+            modelBuilder.Configurations.Add(new UsuarioConfiguration());
             modelBuilder.Configurations.Add(new EventoConfiguration());
             
         }
