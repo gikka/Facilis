@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Facilis.MVC.ViewModels;
 using Facilis.Domain.Entities;
+using Facilis.Infra.CrossCutting.Identity.Model;
+using Facilis.MVC.ViewModels;
 
 namespace Facilis.MVC.AutoMapper
 {
@@ -14,6 +15,7 @@ namespace Facilis.MVC.AutoMapper
         protected override void Configure()
         {
             Mapper.CreateMap<EventoViewModel, Evento>();
+            Mapper.CreateMap<RegisterViewModel, Usuario>();
         }
     }
 }

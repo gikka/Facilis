@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Facilis.Application.Interface;
+using Facilis.Domain.Entities;
 
 namespace Facilis.MVC.Controllers
 {
@@ -87,14 +88,33 @@ namespace Facilis.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                //    Bairro = model.Bairro, Cep = model.Cep, Complemento = model.Complemento,
-                //    DataNascimento = model.DataNascimento, Endereco = model.Endereco, Nome = model.Nome,
-                //    Numero = model.Numero, Sexo = model.Sexo, Telefone = model.Telefone,
-                //    Sobrenome = model.Sobrenome
-                //};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    usuario = new Usuario
+                    {
+                        Bairro = model.Bairro,
+                        Cep = model.Cep,
+                        Complemento = model.Complemento,
+                        DataNascimento = model.DataNascimento,
+                        Endereco = model.Endereco,
+                        Nome = model.Nome,
+                        Numero = model.Numero,
+                        Sexo = model.Sexo,
+                        Telefone = model.Telefone,
+                        Sobrenome = model.Sobrenome,
+                        EstadoId = model.EstadoId,
+                        CidadeId = model.CidadeId,
+                        Estado = model.Estado,
+                        Cidade = model.Cidade, 
+                        Email = model.Email
+                    }
+                };
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //para permitir relacionamento de usuario com outras entidades
+                user.usuario.Id = user.Id;
+
                 var result = await _userManager.CreateAsync(user, model.Senha);
 
                 if (result.Succeeded)

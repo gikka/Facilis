@@ -8,7 +8,7 @@ namespace Facilis.Infra.CrossCutting.Identity.Model
     public class RegisterViewModel
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [MaxLength(100, ErrorMessage = "Máximo {0} caracteres")]

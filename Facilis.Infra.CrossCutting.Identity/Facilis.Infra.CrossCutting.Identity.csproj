@@ -33,8 +33,6 @@
   <ItemGroup>
     <Compile Include="Configuration\ApplicationSignInManager.cs" />
     <Compile Include="Configuration\ApplicationUserManager.cs" />
-    <Compile Include="Configuration\UsuarioConfiguration.cs" />
-    <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="Model\ChangePasswordViewModel.cs" />
     <Compile Include="Model\FactorViewModel.cs" />
@@ -103,10 +101,6 @@
     <ProjectReference Include="..\Facilis.Domain\Facilis.Domain.csproj">
       <Project>{2b8a4ef8-21b7-41fb-b0ab-4c392c33f94a}</Project>
       <Name>Facilis.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Facilis.Infra.Data\Facilis.Infra.Data.csproj">
-      <Project>{e52f7942-17ae-4dc3-a30e-77fb36819c1c}</Project>
-      <Name>Facilis.Infra.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

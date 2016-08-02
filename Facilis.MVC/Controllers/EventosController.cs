@@ -4,9 +4,11 @@ using Facilis.MVC.ViewModels;
 using Facilis.Domain.Entities;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace Facilis.MVC.Controllers
 {
+    [Authorize]
     public class EventosController : Controller
     {
         // GET: Evento
@@ -16,9 +18,12 @@ namespace Facilis.MVC.Controllers
         {
             _eventoApp = eventoApp;
         }
+        
+
         public ActionResult Index()
         {
-            var eventoViewModel = Mapper.Map<IEnumerable<Evento>, IEnumerable<EventoViewModel>>(_eventoApp.GetAll());
+            var listaEventos = _eventoApp.ListarPorUsuario(User.Identity.GetUserId()); 
+            var eventoViewModel = Mapper.Map<IEnumerable<Evento>, IEnumerable<EventoViewModel>>(listaEventos);
 
             return View(eventoViewModel); ;
         }
@@ -46,6 +51,7 @@ namespace Facilis.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var eventoDomain = Mapper.Map<EventoViewModel, Evento>(evento);
+                eventoDomain.UsuarioId = User.Identity.GetUserId();
                 _eventoApp.Add(eventoDomain);
 
                 return RedirectToAction("Index");
@@ -71,6 +77,7 @@ namespace Facilis.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var eventoDomain = Mapper.Map<EventoViewModel, Evento>(evento);
+                eventoDomain.UsuarioId = User.Identity.GetUserId();
                 _eventoApp.Update(eventoDomain);
 
                 return RedirectToAction("Index");

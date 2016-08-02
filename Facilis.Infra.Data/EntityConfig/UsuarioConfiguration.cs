@@ -9,6 +9,10 @@ namespace Facilis.Infra.Data.EntityConfig
         public UsuarioConfiguration()
         {
             HasKey(u => u.Id);
+            
+            Property(u => u.Id)
+                .IsRequired()
+                .HasMaxLength(128);
 
             Property(u => u.Nome)
                 .IsRequired()
@@ -49,10 +53,7 @@ namespace Facilis.Infra.Data.EntityConfig
             Property(u => u.Bairro)
                 .IsRequired()
                 .HasMaxLength(50);
-
-            Property(u => u.UserName)
-                .HasMaxLength(256);
-
+           
             HasRequired(u => u.Estado)
                 .WithMany()
                 .HasForeignKey(u => u.EstadoId);
@@ -60,9 +61,6 @@ namespace Facilis.Infra.Data.EntityConfig
             HasRequired(u => u.Cidade)
                 .WithMany()
                 .HasForeignKey(u => u.CidadeId);
-
-            ToTable("AspNetUsers");
-
         }
     }
 }

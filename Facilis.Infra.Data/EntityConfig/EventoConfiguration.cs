@@ -47,6 +47,9 @@ namespace Facilis.Infra.Data.EntityConfig
                 .WithMany()
                 .HasForeignKey(e => e.UsuarioId);
 
+            Property(e => e.UsuarioId)
+                .HasMaxLength(128);
+
         }
     }
 }
