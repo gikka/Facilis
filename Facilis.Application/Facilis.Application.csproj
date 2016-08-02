@@ -45,8 +45,10 @@
     <Compile Include="CidadeAppService.cs" />
     <Compile Include="EstadoAppService.cs" />
     <Compile Include="EventoAppService.cs" />
+    <Compile Include="CupomAppService.cs" />
     <Compile Include="Interface\IAppServiceBase.cs" />
     <Compile Include="Interface\ICidadeAppService.cs" />
+    <Compile Include="Interface\ICupomAppService.cs" />
     <Compile Include="Interface\IEstadoAppService.cs" />
     <Compile Include="Interface\IEventoAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

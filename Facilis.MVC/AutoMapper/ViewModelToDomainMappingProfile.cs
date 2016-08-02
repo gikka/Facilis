@@ -16,6 +16,7 @@ namespace Facilis.MVC.AutoMapper
         {
             Mapper.CreateMap<Evento, EventoViewModel>();
             Mapper.CreateMap<Usuario, RegisterViewModel>();
+            Mapper.CreateMap<Cupom, CupomViewModel>();
         }
     }
 }

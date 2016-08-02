@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.CupomViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PercentualDesconto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Validade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PercentualDesconto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Validade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CupomId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CupomId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CupomId })
+        </td>
+    </tr>
+}
+
+</table>

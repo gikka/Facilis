@@ -35,6 +35,10 @@ namespace Facilis.Infra.CrossCutting.IoC
             container.RegisterPerWebRequest<ICidadeAppService, CidadeAppService>();
             container.RegisterPerWebRequest<ICidadeService, CidadeService>();
             container.RegisterPerWebRequest<ICidadeRepository, CidadeRepository>();
+
+            container.RegisterPerWebRequest<ICupomAppService, CupomAppService>();
+            container.RegisterPerWebRequest<ICupomService, CupomService>();
+            container.RegisterPerWebRequest<ICupomRepository, CupomRepository>();
         }
     }
 }

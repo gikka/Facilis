@@ -20,6 +20,7 @@ namespace Facilis.Infra.Data.Context
         public DbSet<Cidade> Cidades { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Evento> Eventos { get; set; }
+        public DbSet<Cupom> Cupons { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -44,6 +45,7 @@ namespace Facilis.Infra.Data.Context
             modelBuilder.Configurations.Add(new EstadoConfiguration());
             modelBuilder.Configurations.Add(new UsuarioConfiguration());
             modelBuilder.Configurations.Add(new EventoConfiguration());
+            modelBuilder.Configurations.Add(new CupomConfiguration());
 
         }
 

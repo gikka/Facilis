@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Facilis.Domain.Entities
 {
@@ -17,5 +18,6 @@ namespace Facilis.Domain.Entities
         public string Descricao { get; set; }
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual IEnumerable<Cupom> Cupons { get; set; }
     }
 }
