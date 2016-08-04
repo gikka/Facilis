@@ -13,10 +13,12 @@ namespace Facilis.MVC.Controllers
     {
         // GET: Evento
         private readonly IEventoAppService _eventoApp;
+        private readonly IArquivoAppService _arquivoApp;
 
-        public EventosController(IEventoAppService eventoApp)
+        public EventosController(IEventoAppService eventoApp, IArquivoAppService arquivoApp)
         {
             _eventoApp = eventoApp;
+            _arquivoApp = arquivoApp;
         }
         
 
@@ -64,6 +66,7 @@ namespace Facilis.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var evento = _eventoApp.GetById(id);
+            evento.Arquivos = _arquivoApp.ListarPorEvento(id);
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
             return View(eventoViewModel);

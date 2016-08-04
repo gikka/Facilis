@@ -52,16 +52,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EventoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventoId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("EventoId", String.Empty)
                 @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UsuarioId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UsuarioId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UsuarioId, "", new { @class = "text-danger" })
             </div>
         </div>
 

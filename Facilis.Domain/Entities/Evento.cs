@@ -19,5 +19,6 @@ namespace Facilis.Domain.Entities
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual IEnumerable<Cupom> Cupons { get; set; }
+        public virtual IEnumerable<Arquivo> Arquivos { get; set; }
     }
 }

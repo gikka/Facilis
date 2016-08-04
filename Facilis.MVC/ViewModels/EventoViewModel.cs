@@ -1,5 +1,6 @@
 ﻿using Facilis.Infra.CrossCutting.Identity.Model;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Facilis.MVC.ViewModels
@@ -64,5 +65,7 @@ namespace Facilis.MVC.ViewModels
 
         public string UsuarioId { get; set; }
         public virtual RegisterViewModel Usuario { get; set; }
+
+        public virtual IEnumerable<ArquivoViewModel> Arquivos { get; set; }
     }
 }

@@ -196,6 +196,7 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArquivosController.cs" />
     <Compile Include="Controllers\CuponsController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -205,6 +206,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ArquivoViewModel.cs" />
     <Compile Include="ViewModels\CidadeViewModel.cs" />
     <Compile Include="ViewModels\CupomViewModel.cs" />
     <Compile Include="ViewModels\EstadoViewModel.cs" />
@@ -265,6 +267,11 @@
     <Content Include="Views\Cupons\Edit.cshtml" />
     <Content Include="Views\Cupons\Details.cshtml" />
     <Content Include="Views\Cupons\Delete.cshtml" />
+    <Content Include="Views\Arquivos\Index.cshtml" />
+    <Content Include="Views\Arquivos\Create.cshtml" />
+    <Content Include="Views\Arquivos\Edit.cshtml" />
+    <Content Include="Views\Arquivos\Delete.cshtml" />
+    <Content Include="Views\Arquivos\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

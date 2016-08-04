@@ -4,6 +4,7 @@ using Facilis.Domain.Entities;
 using Facilis.MVC.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Facilis.MVC.Controllers
@@ -12,10 +13,12 @@ namespace Facilis.MVC.Controllers
     public class CuponsController : Controller
     {
         private readonly ICupomAppService _cupomApp;
+        private readonly IEventoAppService _eventoApp;
 
-        public CuponsController(ICupomAppService cupomApp)
+        public CuponsController(ICupomAppService cupomApp, IEventoAppService eventoApp)
         {
             _cupomApp = cupomApp;
+            _eventoApp = eventoApp;
         }
 
 
@@ -35,12 +38,14 @@ namespace Facilis.MVC.Controllers
             var cupom = _cupomApp.GetById(id);
             var cupomViewModel = Mapper.Map<Cupom, CupomViewModel>(cupom);
 
+            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
             return View(cupomViewModel);
         }
 
         // GET: Cupom/Create
         public ActionResult Create()
         {
+            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome");
             return View();
         }
 
@@ -57,7 +62,7 @@ namespace Facilis.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-
+            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
             return View(cupom);
         }
 
@@ -67,6 +72,7 @@ namespace Facilis.MVC.Controllers
             var cupom = _cupomApp.GetById(id);
             var cupomViewModel = Mapper.Map<Cupom, CupomViewModel>(cupom);
 
+            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
             return View(cupomViewModel);
         }
 
@@ -85,6 +91,7 @@ namespace Facilis.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
             return View(cupom);
         }
 
