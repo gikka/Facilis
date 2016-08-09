@@ -29,7 +29,7 @@ namespace Facilis.MVC.Controllers
             var listaEventos = _eventoApp.ListarPorUsuario(User.Identity.GetUserId()); 
             var eventoViewModel = Mapper.Map<IEnumerable<Evento>, IEnumerable<EventoViewModel>>(listaEventos);
 
-            return View(eventoViewModel); ;
+            return View(eventoViewModel); 
         }
 
         // GET: Evento/Details/5
@@ -111,5 +111,6 @@ namespace Facilis.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
     }
 }

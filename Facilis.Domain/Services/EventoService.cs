@@ -19,5 +19,10 @@ namespace Facilis.Domain.Services
         {
             return _eventoRepository.ListarPorUsuario(usuarioId);
         }
+
+        public IEnumerable<Evento> ListarProximos()
+        {
+            return _eventoRepository.ListarProximos();
+        }
     }
 }
