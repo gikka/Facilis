@@ -22,6 +22,7 @@ namespace Facilis.Infra.Data.Context
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Cupom> Cupons { get; set; }
         public DbSet<Arquivo> Arquivos { get; set; }
+        public DbSet<Video> Videos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -48,6 +49,7 @@ namespace Facilis.Infra.Data.Context
             modelBuilder.Configurations.Add(new EventoConfiguration());
             modelBuilder.Configurations.Add(new CupomConfiguration());
             modelBuilder.Configurations.Add(new ArquivoConfiguration());
+            modelBuilder.Configurations.Add(new VideoConfiguration());
 
         }
 

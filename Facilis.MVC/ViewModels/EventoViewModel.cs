@@ -67,5 +67,6 @@ namespace Facilis.MVC.ViewModels
         public virtual RegisterViewModel Usuario { get; set; }
 
         public virtual IEnumerable<ArquivoViewModel> Arquivos { get; set; }
+        public virtual IEnumerable<VideoViewModel> Videos { get; set; }
     }
 }

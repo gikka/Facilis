@@ -34,9 +34,9 @@ namespace Facilis.MVC.Controllers
         {
 
             var arquivo = _arquivoApp.GetById(id);
-            var cupomViewModel = Mapper.Map<Arquivo, ArquivoViewModel>(arquivo);
+            var arquivoViewModel = Mapper.Map<Arquivo, ArquivoViewModel>(arquivo);
 
-            return View(cupomViewModel);
+            return View(arquivoViewModel);
         }
 
         // GET: Arquivo/Create
@@ -67,7 +67,7 @@ namespace Facilis.MVC.Controllers
 
                 _arquivoApp.Add(arquivoDomain);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "Eventos", new { id = arquivo.EventoId});
             }
             return View(arquivo);
         }
@@ -92,7 +92,7 @@ namespace Facilis.MVC.Controllers
                 var arquivoDomain = Mapper.Map<ArquivoViewModel, Arquivo>(arquivo);
                 _arquivoApp.Update(arquivoDomain);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "Eventos", new { id = arquivo.EventoId });
             }
             
            return View(arquivo);
@@ -116,7 +116,7 @@ namespace Facilis.MVC.Controllers
             var arquivo = _arquivoApp.GetById(id);
             _arquivoApp.Remove(arquivo);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "Eventos", new { id = arquivo.EventoId });
         }
     }
 }

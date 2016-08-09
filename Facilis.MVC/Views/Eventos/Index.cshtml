@@ -30,16 +30,7 @@
             @Html.DisplayNameFor(model => model.QuantidadeVagas)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomePalestrante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailPalestrante)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.TipoEvento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
         </th>
         <th></th>
     </tr>
@@ -65,16 +56,7 @@
             @Html.DisplayFor(modelItem => item.QuantidadeVagas)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NomePalestrante)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailPalestrante)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.TipoEvento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.EventoId }) |

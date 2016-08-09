@@ -19,8 +19,7 @@ namespace Facilis.MVC.ViewModels
         [MinLength(2, ErrorMessage = "Mínimo {0} caracteres")]
         [DataType(DataType.MultilineText)]
         public string Descricao { get; set; }
-
-        
+    
         public string ContentType { get; set; }
         public byte[] Content { get; set; }
 
