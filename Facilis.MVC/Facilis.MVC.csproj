@@ -282,6 +282,7 @@
     <Content Include="Views\Videos\Delete.cshtml" />
     <Content Include="Views\Videos\View.cshtml" />
     <Content Include="Views\Videos\Details.cshtml" />
+    <Content Include="Views\Eventos\DetalhesInscricao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

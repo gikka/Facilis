@@ -17,7 +17,8 @@
         <p>
             @Html.DisplayFor(modelItem => item.Descricao)
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        
+        <p>@Html.ActionLink("Leia mais", "DetalhesInscricao", "Eventos", new { id = item.EventoId }, new { htmlAttributes = new { @class = "btn btn-default" } })</p>
     </div>
 }
 </div>

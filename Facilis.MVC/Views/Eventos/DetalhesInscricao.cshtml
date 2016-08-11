@@ -1,0 +1,29 @@
+﻿@model Facilis.MVC.ViewModels.EventoViewModel
+
+@{
+    ViewBag.Title = "DetalhesInscricao";
+}
+<div>
+    <h2>@Html.DisplayFor(model => model.Nome)</h2>
+    <p>@(String.Format("{0:dd/MM/yyyy}, {1} - {2:dd/MM/yyyy}, {3}", Model.DataInicial, Model.HoraInicial, Model.DataFinal, Model.HoraFinal))</p>
+</div>
+<div>
+    <hr />
+    <h4><b>@Html.DisplayNameFor(model => model.Descricao)</b></h4>
+    <p>@Html.DisplayFor(model => model.Descricao)</p>    
+</div>
+<div>
+    <hr />
+    <h4><b>@Html.DisplayNameFor(model => model.NomePalestrante)</b></h4>
+    <p>@Html.DisplayFor(model => model.NomePalestrante)</p>
+    <p>@(String.Format("Contato: {0}", Model.EmailPalestrante))</p>
+</div>
+<div>
+    <h3>Inscreva-se</h3>
+    <p><b>Tipo do evento: </b>@Html.DisplayFor(model => model.TipoEvento)</p>
+    <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
+    <p>@Html.ActionLink("Realizar Inscrição", "Inscricao", "Inscricao", new { id = Model.EventoId }, new { htmlAttributes = new { @class = "btn btn-primary btn-lg" } })</p>
+</div>
+<p>
+    @Html.ActionLink("Voltar", "Index", "Home")
+</p>

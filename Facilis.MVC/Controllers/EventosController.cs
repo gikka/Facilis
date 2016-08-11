@@ -112,5 +112,15 @@ namespace Facilis.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Evento/DetalhesInscricao
+        [AllowAnonymous]
+        public ActionResult DetalhesInscricao(int id)
+        {
+            var evento = _eventoApp.GetById(id);
+            var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+            return View(eventoViewModel);
+        }
+
     }
 }
