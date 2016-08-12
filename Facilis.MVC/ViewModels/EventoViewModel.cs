@@ -19,6 +19,7 @@ namespace Facilis.MVC.ViewModels
         [Required(ErrorMessage = "Preencha o campo Data inicial")]
         [Display(Name = "Data inicial")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DataInicial { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Hora inicial")]
@@ -29,6 +30,7 @@ namespace Facilis.MVC.ViewModels
         [Required(ErrorMessage = "Preencha o campo Data final")]
         [Display(Name = "Data final")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DataFinal { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Hora final")]

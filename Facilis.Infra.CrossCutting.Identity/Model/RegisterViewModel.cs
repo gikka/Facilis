@@ -42,6 +42,7 @@ namespace Facilis.Infra.CrossCutting.Identity.Model
         [Required(ErrorMessage = "Preencha o campo Data de Nascimento")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DataNascimento { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Telefone")]

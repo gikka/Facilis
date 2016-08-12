@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Facilis.Domain.Entities
 {
@@ -13,5 +14,6 @@ namespace Facilis.Domain.Entities
         public virtual Evento Evento { get; set; }
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual IEnumerable<Participante> Participantes { get; set; }
     }
 }

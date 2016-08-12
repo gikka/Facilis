@@ -36,6 +36,7 @@
     <Compile Include="Entities\Cupom.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\Evento.cs" />
+    <Compile Include="Entities\Participante.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Video.cs" />
     <Compile Include="Interfaces\Repositories\IArquivoRepository.cs" />

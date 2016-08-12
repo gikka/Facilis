@@ -92,6 +92,7 @@
     <Compile Include="EntityConfig\CupomConfiguration.cs" />
     <Compile Include="EntityConfig\EstadoConfiguration.cs" />
     <Compile Include="EntityConfig\EventoConfiguration.cs" />
+    <Compile Include="EntityConfig\ParticipanteConfiguration.cs" />
     <Compile Include="EntityConfig\UsuarioConfiguration.cs" />
     <Compile Include="EntityConfig\VideoConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />

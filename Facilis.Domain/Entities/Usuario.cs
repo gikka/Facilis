@@ -23,5 +23,6 @@ namespace Facilis.Domain.Entities
         public virtual Cidade Cidade { get; set; }
         public virtual IEnumerable<Evento> Eventos { get; set; }
         public virtual IEnumerable<Cupom> Cupons { get; set; }
+        public virtual IEnumerable<Participante> Participantes { get; set; }
     }
 }
