@@ -15,10 +15,10 @@ namespace Facilis.Domain.Entities
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
 
-        public int EventoId{ get; set; }
+        public int ?EventoId{ get; set; }
         public virtual Evento Evento { get; set; }
 
-        public int CupomId { get; set; }
+        public int ?CupomId { get; set; }
         public virtual Cupom Cupom { get; set; }
 
     }

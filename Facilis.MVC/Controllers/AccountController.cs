@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Facilis.Application.Interface;
 using Facilis.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Facilis.MVC.Controllers
 {
@@ -76,6 +77,7 @@ namespace Facilis.MVC.Controllers
         {
             ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome");
             ViewBag.CidadeId = new SelectList(string.Empty , "CidadeId", "Nome");
+            CarregarDropDownSexo();
             return View();
         }
 
@@ -126,6 +128,7 @@ namespace Facilis.MVC.Controllers
 
                 ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
                 ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
+                CarregarDropDownSexo();
                 AddErrors(result);
 
 
@@ -133,6 +136,7 @@ namespace Facilis.MVC.Controllers
 
             ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
             ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
+            CarregarDropDownSexo();
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -328,6 +332,16 @@ namespace Facilis.MVC.Controllers
 
         [AllowAnonymous]
         public ActionResult ListarCidadesPorEstado(int estadoId) => Json(_cidadeApp.ListarPorEstado(estadoId).ToList(), JsonRequestBehavior.AllowGet);
+
+        private void CarregarDropDownSexo()
+        {
+            var SexoList = new List<dynamic>();
+            SexoList.Add(new { Id = "", Text = "" });
+            SexoList.Add(new { Id = "M", Text = "Masculino" });
+            SexoList.Add(new { Id = "F", Text = "Feminino" });
+            ViewBag.SexoList = new SelectList(SexoList, "Id", "Text");
+
+        }
         #endregion
     }
 }

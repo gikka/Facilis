@@ -44,6 +44,7 @@
     <Compile Include="Interfaces\Repositories\ICupomRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEstadoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IEventoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IParticipanteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
     <Compile Include="Interfaces\Repositories\IVideoRepository.cs" />
     <Compile Include="Interfaces\Services\IArquivoService.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Interfaces\Services\ICupomService.cs" />
     <Compile Include="Interfaces\Services\IEstadoService.cs" />
     <Compile Include="Interfaces\Services\IEventoService.cs" />
+    <Compile Include="Interfaces\Services\IParticipanteService.cs" />
     <Compile Include="Interfaces\Services\IServiceBase.cs" />
     <Compile Include="Interfaces\Services\IVideoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Services\CupomService.cs" />
     <Compile Include="Services\EstadoService.cs" />
     <Compile Include="Services\EventoService.cs" />
+    <Compile Include="Services\ParticipanteService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\VideoService.cs" />
   </ItemGroup>

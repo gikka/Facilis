@@ -122,5 +122,15 @@ namespace Facilis.MVC.Controllers
             return View(eventoViewModel);
         }
 
+        private void CarregarDropDownTipoEvento()
+        {
+            var TipoEventoList = new List<dynamic>();
+            TipoEventoList.Add(new { Id = "", Text = "" });
+            TipoEventoList.Add(new { Id = "1", Text = "Gratuito" });
+            TipoEventoList.Add(new { Id = "2", Text = "Pago" });
+            ViewBag.SexoList = new SelectList(TipoEventoList, "Id", "Text");
+
+        }
+
     }
 }

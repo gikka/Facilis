@@ -1,19 +1,22 @@
 ﻿@model Facilis.Infra.CrossCutting.Identity.Model.RegisterViewModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Register</h2>
+<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>RegisterViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -73,7 +76,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sexo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Sexo, ViewBag.SexoList as SelectList, new { @class = "form-control" })
+                @Html.EditorFor(model => model.Sexo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,24 +120,26 @@
                 @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("EstadoId", String.Empty)
+                @Html.EditorFor(model => model.EstadoId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EstadoId, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.CidadeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CidadeId", String.Empty)
+                @Html.EditorFor(model => model.CidadeId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CidadeId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -144,25 +149,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#EstadoId").change(function () {
-            var estadoId = $(this).val()
-            if (estadoId > 0) {
-                listaCidades($(this).val());
-            }
-        });
-    });
-
-    function listaCidades(estadoId) {
-        $.getJSON('@Url.Action("ListarCidadesPorEstado")?estadoId=' + estadoId, listaCidadesCallBack);
-    }
-
-    function listaCidadesCallBack(json) {
-        $("#CidadeId :gt(0)").remove();
-        $(json).each(function () {
-            $("#CidadeId").append("<option value='" + this.CidadeId + "'>" + this.Nome + "</option>");
-        });
-    }
-
-</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

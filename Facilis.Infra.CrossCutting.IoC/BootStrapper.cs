@@ -47,6 +47,10 @@ namespace Facilis.Infra.CrossCutting.IoC
             container.RegisterPerWebRequest<IVideoAppService, VideoAppService>();
             container.RegisterPerWebRequest<IVideoService, VideoService>();
             container.RegisterPerWebRequest<IVideoRepository, VideoRepository>();
+
+            container.RegisterPerWebRequest<IParticipanteAppService, ParticipanteAppService>();
+            container.RegisterPerWebRequest<IParticipanteService, ParticipanteService>();
+            container.RegisterPerWebRequest<IParticipanteRepository, ParticipanteRepository>();
         }
     }
 }

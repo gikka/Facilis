@@ -102,6 +102,7 @@
     <Compile Include="Repositories\CupomRepository.cs" />
     <Compile Include="Repositories\EstadoRepository.cs" />
     <Compile Include="Repositories\EventoRepository.cs" />
+    <Compile Include="Repositories\ParticipanteRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\VideoRepository.cs" />
   </ItemGroup>

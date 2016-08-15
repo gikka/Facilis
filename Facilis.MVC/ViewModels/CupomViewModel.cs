@@ -26,6 +26,7 @@ namespace Facilis.MVC.ViewModels
         [Required(ErrorMessage = "Preencha o campo Validade até")]
         [Display(Name = "Validade até")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Validade { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Evento")]

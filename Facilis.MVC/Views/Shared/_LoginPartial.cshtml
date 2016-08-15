@@ -7,12 +7,13 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Olá " + User.Identity.GetUserName() + "!", "Edit", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li>
             <li>@Html.ActionLink("Minhas Inscrições", "", "", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Meus Eventos", "Index", "Eventos", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Novo Evento", "Create", "Eventos", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Cupons", "Index", "Cupons", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
         </ul>
     }
