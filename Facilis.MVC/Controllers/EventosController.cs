@@ -44,6 +44,7 @@ namespace Facilis.MVC.Controllers
         // GET: Evento/Create
         public ActionResult Create()
         {
+            CarregarDropDownTipoEvento();
             return View();
         }
 
@@ -67,6 +68,8 @@ namespace Facilis.MVC.Controllers
         // GET: Evento/Edit/5
         public ActionResult Edit(int id)
         {
+            CarregarDropDownTipoEvento();
+
             var evento = _eventoApp.GetById(id);
             evento.Arquivos = _arquivoApp.ListarPorEvento(id);
             evento.Videos = _videoApp.ListarPorEvento(id);
@@ -128,7 +131,7 @@ namespace Facilis.MVC.Controllers
             TipoEventoList.Add(new { Id = "", Text = "" });
             TipoEventoList.Add(new { Id = "1", Text = "Gratuito" });
             TipoEventoList.Add(new { Id = "2", Text = "Pago" });
-            ViewBag.SexoList = new SelectList(TipoEventoList, "Id", "Text");
+            ViewBag.TipoEventoList = new SelectList(TipoEventoList, "Id", "Text");
 
         }
 

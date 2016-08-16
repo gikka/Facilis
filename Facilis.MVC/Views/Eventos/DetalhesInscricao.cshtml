@@ -22,7 +22,7 @@
     <h3>Inscreva-se</h3>
     <p><b>Tipo do evento: </b>@Html.DisplayFor(model => model.TipoEvento)</p>
     <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
-    <p>@Html.ActionLink("Realizar Inscrição", "Inscricao", "Inscricao", new { id = Model.EventoId }, new { htmlAttributes = new { @class = "btn btn-primary btn-lg" } })</p>
+    <p>@Html.ActionLink("Realizar Inscrição", "Inscricao", "Participantes", new { id = Model.EventoId }, new { htmlAttributes = new { @class = "btn btn-primary btn-lg" } })</p>
 </div>
 <p>
     @Html.ActionLink("Voltar", "Index", "Home")

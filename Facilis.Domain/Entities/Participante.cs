@@ -11,6 +11,7 @@ namespace Facilis.Domain.Entities
         public bool Presenca { get; set; }
         public DateTime DataCancelamento { get; set; }
         public DateTime DataInscricao { get; set; }
+        public int ?FormaPagamento { get; set; }
 
         public string UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }

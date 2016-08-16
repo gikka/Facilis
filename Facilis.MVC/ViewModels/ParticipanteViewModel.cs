@@ -18,6 +18,9 @@ namespace Facilis.MVC.ViewModels
         public DateTime DataCancelamento { get; set; }
         public DateTime DataInscricao { get; set; }
 
+        [Display(Name = "Forma de Pagamento")]
+        public int FormaPagamento { get; set; }
+
         public string UsuarioId { get; set; }
         public virtual RegisterViewModel UsuarioViewModel { get; set; }
 

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.ParticipanteViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cracha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brinde)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Certificado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Presenca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataCancelamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataInscricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventoId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CupomId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cracha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brinde)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Certificado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Presenca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataCancelamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataInscricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventoId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CupomId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ParticipanteId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ParticipanteId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ParticipanteId })
+        </td>
+    </tr>
+}
+
+</table>

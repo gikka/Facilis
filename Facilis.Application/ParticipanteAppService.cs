@@ -1,6 +1,7 @@
 ﻿using Facilis.Application.Interface;
 using Facilis.Domain.Entities;
 using Facilis.Domain.Interfaces.Services;
+using System.Collections.Generic;
 
 namespace Facilis.Application
 {
@@ -11,6 +12,11 @@ namespace Facilis.Application
             : base(participanteService)
         {
             _participanteService = participanteService;
+        }
+
+        public IEnumerable<Participante> ListarPorUsuario(string usuarioId)
+        {
+            return _participanteService.ListarPorUsuario(usuarioId);
         }
     }
 }

@@ -19,10 +19,9 @@ namespace Facilis.MVC.Controllers
         }
 
         // GET: Arquivos
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            //var listaArquivos = _arquivoApp.ListarPorEvento(eventoId);
-            var listaArquivos = _arquivoApp.GetAll();
+            var listaArquivos = _arquivoApp.ListarPorEvento(id);
             var arquivoViewModel = Mapper.Map<IEnumerable<Arquivo>, IEnumerable<ArquivoViewModel>>(listaArquivos);
 
             return View(arquivoViewModel); 

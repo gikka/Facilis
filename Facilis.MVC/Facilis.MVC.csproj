@@ -201,7 +201,7 @@
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ParticipanteController.cs" />
+    <Compile Include="Controllers\ParticipantesController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -286,10 +286,11 @@
     <Content Include="Views\Videos\Details.cshtml" />
     <Content Include="Views\Eventos\DetalhesInscricao.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Participantes\Inscricao.cshtml" />
+    <Content Include="Views\Participantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Participante\" />
     <Folder Include="Views\Usuarios\" />
   </ItemGroup>
   <ItemGroup>

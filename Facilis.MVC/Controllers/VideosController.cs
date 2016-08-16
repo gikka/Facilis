@@ -18,10 +18,9 @@ namespace Facilis.MVC.Controllers
         }
 
         // GET: Videos
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            //var lista = _videoApp.ListarPorEvento(eventoId);
-            var lista = _videoApp.GetAll();
+            var lista = _videoApp.ListarPorEvento(id);
             var videoViewModel = Mapper.Map<IEnumerable<Video>, IEnumerable<VideoViewModel>>(lista);
 
             return View(videoViewModel);
