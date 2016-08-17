@@ -8,17 +8,19 @@
     <p class="lead">Cadastre-se, crie e participe dos melhores eventos do Brasil e do mundo. Conecte-se a pessoas com os mesmos interesses que você. Facilis é uma plataforma muito fácil e simples de entender e utilizar.</p>
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-
 <div class="row">
-@foreach (var item in Model)
-{
-    <div class="col-md-3">
-        <h2>@Html.DisplayFor(modelItem => item.Nome)</h2>
-        <p>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </p>
-        
-        <p>@Html.ActionLink("Leia mais", "DetalhesInscricao", "Eventos", new { id = item.EventoId }, new { htmlAttributes = new { @class = "btn btn-default" } })</p>
-    </div>
-}
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-3">
+            <h2>@Html.DisplayFor(modelItem => item.Nome)</h2>
+            <p>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </p>
+
+            <p>@Html.ActionLink("Leia mais", "DetalhesInscricao", "Eventos", new { id = item.EventoId }, new { htmlAttributes = new { @class = "btn btn-default" } })</p>
+        </div>
+
+    }
 </div>
+

@@ -6,35 +6,47 @@
 <h2>Realizar inscrição em @Html.DisplayFor(model => model.EventoViewModel.Nome)</h2>
 @using (Html.BeginForm())
 {
-    <div class="form-group col-md-6">
-        @Html.LabelFor(model => model.UsuarioViewModel.Nome)
-        @Html.EditorFor(model => model.UsuarioViewModel.Nome, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-        @Html.ValidationMessageFor(model => model.UsuarioViewModel.Nome, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col-md-6">
-        @Html.LabelFor(model => model.UsuarioViewModel.Sobrenome)
-        @Html.EditorFor(model => model.UsuarioViewModel.Sobrenome, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-        @Html.ValidationMessageFor(model => model.UsuarioViewModel.Sobrenome, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col-md-12">
-        @Html.LabelFor(model => model.UsuarioViewModel.Email)
-        @Html.EditorFor(model => model.UsuarioViewModel.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-        @Html.ValidationMessageFor(model => model.UsuarioViewModel.Email, "", new { @class = "text-danger" })
-    </div>
-    if (Model.EventoViewModel.TipoEvento == 1)
-    {
+    @Html.HiddenFor(model => model.EventoId)
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
         <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.CupomViewModel.Nome)
-            @Html.EditorFor(model => model.CupomViewModel.Nome, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CupomViewModel.Nome, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.UsuarioViewModel.Nome)
+            @Html.EditorFor(model => model.UsuarioViewModel.Nome, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.UsuarioViewModel.Nome, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-6">
-            @Html.LabelFor(model => model.FormaPagamento)
-            @Html.DropDownListFor(model => model.FormaPagamento, ViewBag.FormaPagamentoList as SelectList, new { @class = "form-control" })
+            @Html.LabelFor(model => model.UsuarioViewModel.Sobrenome)
+            @Html.EditorFor(model => model.UsuarioViewModel.Sobrenome, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.UsuarioViewModel.Sobrenome, "", new { @class = "text-danger" })
         </div>
-    }
-    <div class="form-group col-md-12">
-        <input type="submit" value="Finalizar inscrição" class="btn btn-primary" />
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.UsuarioViewModel.Email)
+            @Html.EditorFor(model => model.UsuarioViewModel.Email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            @Html.ValidationMessageFor(model => model.UsuarioViewModel.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.EventoViewModel.TipoEvento == 2)
+        {
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CupomViewModel.Nome)
+                @Html.EditorFor(model => model.CupomViewModel.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.FormaPagamento)
+                @Html.DropDownListFor(model => model.FormaPagamento, ViewBag.FormaPagamentoList as SelectList, new { @class = "form-control" })
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <input type="submit" value="Finalizar inscrição" class="btn btn-primary" />
+        </div>
+
     </div>
 }
 

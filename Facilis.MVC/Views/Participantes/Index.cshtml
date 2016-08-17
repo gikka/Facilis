@@ -27,9 +27,6 @@
             @Html.DisplayNameFor(model => model.DataInscricao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UsuarioId)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.EventoId)
         </th>
         <th>
@@ -59,18 +56,13 @@
             @Html.DisplayFor(modelItem => item.DataInscricao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UsuarioId)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.EventoId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CupomId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ParticipanteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ParticipanteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ParticipanteId })
+            @Html.ActionLink("Cancelar inscrição", "CancelarInscricao", new { id=item.ParticipanteId }) 
         </td>
     </tr>
 }

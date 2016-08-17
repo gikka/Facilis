@@ -288,6 +288,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Participantes\Inscricao.cshtml" />
     <Content Include="Views\Participantes\Index.cshtml" />
+    <Content Include="Views\Participantes\CancelarInscricao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

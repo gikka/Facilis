@@ -1,0 +1,104 @@
+﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
+
+@{
+    ViewBag.Title = "CancelarInscricao";
+}
+
+<h2>CancelarInscricao</h2>
+
+<h3>Confirma o cancelamento da inscrição?</h3>
+<div>
+    <h4>ParticipanteViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cracha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cracha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brinde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brinde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Certificado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Certificado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Presenca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Presenca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCancelamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCancelamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataInscricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataInscricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FormaPagamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FormaPagamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CupomId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CupomId)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

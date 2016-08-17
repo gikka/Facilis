@@ -5,6 +5,7 @@ using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using Facilis.MVC.ViewModels;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -45,7 +46,8 @@ namespace Facilis.MVC.Controllers
 
                 Usuario = usuario.usuario,
                 UsuarioId = usuario.Id,
-                Evento = evento
+                Evento = evento,
+                EventoId = id
                
             };
 
@@ -59,6 +61,66 @@ namespace Facilis.MVC.Controllers
             CarregarDropDownFormaPagamento();
 
             return View(participanteViewModel);
+        }
+
+        // POST: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Inscricao(ParticipanteViewModel participante)
+        {
+            CarregarDropDownFormaPagamento();
+
+            if (ModelState.IsValid)
+            {
+                var participanteDomain = Mapper.Map<ParticipanteViewModel, Participante>(participante);
+                participanteDomain.UsuarioId = User.Identity.GetUserId();
+
+                var evento = _eventoApp.GetById(participanteDomain.EventoId);
+                var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+                var usuario = _userManager.FindById(User.Identity.GetUserId());
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+
+                participante.EventoViewModel = eventoViewModel;
+                participante.UsuarioViewModel = usuarioViewModel;
+
+                //não permitir que o usuário se inscreva nos próprios eventos
+                if (participanteDomain.UsuarioId == evento.UsuarioId)
+                {
+                    ModelState.AddModelError("", "Você não pode se inscrever no próprio evento.");
+                    return View(participante);
+                }
+
+                participanteDomain.DataInscricao = DateTime.Now;
+                participanteDomain.DataCancelamento = null;
+                _participanteApp.Add(participanteDomain);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(participante);
+        }
+
+        // GET: Cancelamento
+        public ActionResult CancelarInscricao(int id)
+        {
+            var participante = _participanteApp.GetById(id);
+            var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
+
+            return View(participanteViewModel);
+        }
+
+        // POST: Cancelamento
+        [HttpPost, ActionName("CancelarInscricao")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmarCancelarInscricao(int id)
+        {
+            var participante = _participanteApp.GetById(id);
+
+            participante.DataCancelamento = DateTime.Now;
+            _participanteApp.Update(participante);
+
+            return RedirectToAction("Index");
         }
 
         private void CarregarDropDownFormaPagamento()
