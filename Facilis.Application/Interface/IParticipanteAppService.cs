@@ -6,5 +6,6 @@ namespace Facilis.Application.Interface
     public interface IParticipanteAppService : IAppServiceBase<Participante>
     {
         IEnumerable<Participante> ListarPorUsuario(string usuarioId);
+        IEnumerable<Participante> ListarInscritosPorEvento(int eventoId);
     }
 }

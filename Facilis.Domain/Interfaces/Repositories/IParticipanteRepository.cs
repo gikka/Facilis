@@ -6,5 +6,6 @@ namespace Facilis.Domain.Interfaces.Repositories
     public interface IParticipanteRepository : IRepositoryBase<Participante>
     {
         IEnumerable<Participante> ListarPorUsuario(string usuarioId);
+        IEnumerable<Participante> ListarInscritosPorEvento(int eventoId);
     }
 }

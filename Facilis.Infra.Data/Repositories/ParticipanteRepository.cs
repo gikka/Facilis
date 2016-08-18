@@ -11,5 +11,10 @@ namespace Facilis.Infra.Data.Repositories
         {
             return Db.Participantes.Where(p => p.UsuarioId == usuarioId).OrderBy(p => p.Evento.DataInicial);
         }
+
+        public IEnumerable<Participante> ListarInscritosPorEvento(int eventoId)
+        {
+            return Db.Participantes.Where(p => p.EventoId == eventoId).OrderBy(p => p.Usuario.Nome);
+        }
     }
 }

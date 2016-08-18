@@ -20,5 +20,10 @@ namespace Facilis.Domain.Services
             return _participanteRepository.ListarPorUsuario(usuarioId);
         }
 
+        public IEnumerable<Participante> ListarInscritosPorEvento(int eventoId)
+        {
+            return _participanteRepository.ListarInscritosPorEvento(eventoId);
+        }
+
     }
 }

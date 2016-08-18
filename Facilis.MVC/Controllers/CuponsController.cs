@@ -38,14 +38,14 @@ namespace Facilis.MVC.Controllers
             var cupom = _cupomApp.GetById(id);
             var cupomViewModel = Mapper.Map<Cupom, CupomViewModel>(cupom);
 
-            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
+            CarregarDropDownEvento(cupom.EventoId);
             return View(cupomViewModel);
         }
 
         // GET: Cupom/Create
         public ActionResult Create()
         {
-            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome");
+            CarregarDropDownEvento(null);
             return View();
         }
 
@@ -62,7 +62,9 @@ namespace Facilis.MVC.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
+
+            CarregarDropDownEvento(cupom.EventoId);
+
             return View(cupom);
         }
 
@@ -72,7 +74,7 @@ namespace Facilis.MVC.Controllers
             var cupom = _cupomApp.GetById(id);
             var cupomViewModel = Mapper.Map<Cupom, CupomViewModel>(cupom);
 
-            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
+            CarregarDropDownEvento(cupom.EventoId);
             return View(cupomViewModel);
         }
 
@@ -91,7 +93,7 @@ namespace Facilis.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EventoId = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", cupom.EventoId);
+            CarregarDropDownEvento(cupom.EventoId);
             return View(cupom);
         }
 
@@ -114,6 +116,19 @@ namespace Facilis.MVC.Controllers
             _cupomApp.Remove(cupom);
 
             return RedirectToAction("Index");
+        }
+
+        private void CarregarDropDownEvento(int ?id)
+        {
+            if (id == null)
+            {
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome");
+            }
+            else
+            {
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", id);
+            }
+            
         }
     }
 }

@@ -7,6 +7,7 @@ using Facilis.MVC.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Facilis.MVC.Controllers
@@ -31,7 +32,7 @@ namespace Facilis.MVC.Controllers
         {
             var lista = _participanteApp.ListarPorUsuario(User.Identity.GetUserId());
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
-            
+
             return View(participanteViewModel);
         }
 
@@ -48,7 +49,7 @@ namespace Facilis.MVC.Controllers
                 UsuarioId = usuario.Id,
                 Evento = evento,
                 EventoId = id
-               
+
             };
 
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
@@ -123,6 +124,66 @@ namespace Facilis.MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: 
+        public ActionResult ControleParticipantes(int id)
+        {
+            var lista = _participanteApp.ListarInscritosPorEvento(id);
+
+            var evento = _eventoApp.GetById(id);
+
+            var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
+
+            //participanteViewModel.EventoViewModel = eventoViewModel;
+
+            foreach (ParticipanteViewModel p in participanteViewModel)
+            {
+                var usuario = _userManager.FindById(p.UsuarioId);
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+                p.UsuarioViewModel = usuarioViewModel;
+            }
+
+            return View(participanteViewModel);
+        }
+
+        // POST: 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ControleParticipantes(ParticipanteViewModel participante)
+        {
+            CarregarDropDownFormaPagamento();
+
+            if (ModelState.IsValid)
+            {
+                var participanteDomain = Mapper.Map<ParticipanteViewModel, Participante>(participante);
+                participanteDomain.UsuarioId = User.Identity.GetUserId();
+
+                var evento = _eventoApp.GetById(participanteDomain.EventoId);
+                var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+                var usuario = _userManager.FindById(User.Identity.GetUserId());
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+
+                participante.EventoViewModel = eventoViewModel;
+                participante.UsuarioViewModel = usuarioViewModel;
+
+                //não permitir que o usuário se inscreva nos próprios eventos
+                if (participanteDomain.UsuarioId == evento.UsuarioId)
+                {
+                    ModelState.AddModelError("", "Você não pode se inscrever no próprio evento.");
+                    return View(participante);
+                }
+
+                participanteDomain.DataInscricao = DateTime.Now;
+                participanteDomain.DataCancelamento = null;
+                _participanteApp.Add(participanteDomain);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(participante);
+        }
+
+
         private void CarregarDropDownFormaPagamento()
         {
             var FormaPagamentoList = new List<dynamic>();
@@ -131,6 +192,18 @@ namespace Facilis.MVC.Controllers
             FormaPagamentoList.Add(new { Id = "2", Text = "Cartão de Crédito" });
             ViewBag.FormaPagamentoList = new SelectList(FormaPagamentoList, "Id", "Text");
 
+        }
+
+        private void CarregarDropDownEvento(int? id)
+        {
+            if (id == null)
+            {
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome");
+            }
+            else
+            {
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", id);
+            }
         }
 
     }
