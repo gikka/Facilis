@@ -23,5 +23,10 @@ namespace Facilis.Application
         {
             return _participanteService.ListarInscritosPorEvento(eventoId);
         }
+
+        public void MarcarPresenca(int id)
+        {
+            _participanteService.MarcarPresenca(id);
+        }
     }
 }

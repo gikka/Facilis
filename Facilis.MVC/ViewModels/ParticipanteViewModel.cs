@@ -11,11 +11,19 @@ namespace Facilis.MVC.ViewModels
     {
         [Key]
         public int ParticipanteId { get; set; }
+
+        [Display(Name = "Crachá")]
         public bool Cracha { get; set; }
         public bool Brinde { get; set; }
+
         public bool Certificado { get; set; }
+
+        [Display(Name = "Presença")]
         public bool Presenca { get; set; }
         public DateTime ?DataCancelamento { get; set; }
+
+        [Display(Name = "Data de inscrição")]
+        [DataType(DataType.DateTime)]
         public DateTime DataInscricao { get; set; }
 
         [Display(Name = "Forma de Pagamento")]

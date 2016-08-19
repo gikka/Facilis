@@ -7,5 +7,6 @@ namespace Facilis.Domain.Interfaces.Repositories
     {
         IEnumerable<Participante> ListarPorUsuario(string usuarioId);
         IEnumerable<Participante> ListarInscritosPorEvento(int eventoId);
+        void MarcarPresenca(int id);
     }
 }

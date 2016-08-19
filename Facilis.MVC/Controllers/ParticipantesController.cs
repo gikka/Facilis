@@ -5,6 +5,7 @@ using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using Facilis.MVC.ViewModels;
 using Microsoft.AspNet.Identity;
+using RotativaHQ.MVC5;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -133,7 +134,7 @@ namespace Facilis.MVC.Controllers
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            //participanteViewModel.EventoViewModel = eventoViewModel;
+            ViewBag.Evento = evento.Nome;
 
             foreach (ParticipanteViewModel p in participanteViewModel)
             {
@@ -183,6 +184,23 @@ namespace Facilis.MVC.Controllers
             return View(participante);
         }
 
+
+        public ActionResult MarcarPresenca(int id, int eventoId)
+        {
+
+            _participanteApp.MarcarPresenca(id);
+            return RedirectToAction("ControleParticipantes", new { id = eventoId });
+        }
+
+        public ActionResult Cracha(int id)
+        {
+             return new ViewAsPdf();
+        }
+
+        public ActionResult Certificado(int id)
+        {
+            return new ViewAsPdf();
+        }
 
         private void CarregarDropDownFormaPagamento()
         {

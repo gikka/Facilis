@@ -16,5 +16,11 @@ namespace Facilis.Infra.Data.Repositories
         {
             return Db.Participantes.Where(p => p.EventoId == eventoId).OrderBy(p => p.Usuario.Nome);
         }
+
+        public void MarcarPresenca(int id)
+        {
+            Db.Participantes.Find(id).Presenca = true;
+            Db.SaveChanges();
+        }
     }
 }
