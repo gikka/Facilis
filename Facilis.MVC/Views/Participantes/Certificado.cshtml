@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "Certificado";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
 }
 
-<h2>Certificado</h2>
-
+<h1 style="text-align: center">Certificado de participação</h1>
+<hr />
+<h2>@Model.UsuarioViewModel.Nome @Model.UsuarioViewModel.Sobrenome</h2>
+<h3>Participou de @Model.EventoViewModel.Nome</h3>
+<h3>em @Model.EventoViewModel.DataInicial das @Model.EventoViewModel.HoraInicial até @Model.EventoViewModel.DataFinal às @Model.EventoViewModel.HoraFinal</h3>

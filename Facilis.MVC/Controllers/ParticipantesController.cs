@@ -5,11 +5,12 @@ using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using Facilis.MVC.ViewModels;
 using Microsoft.AspNet.Identity;
-using RotativaHQ.MVC5;
+using MvcRazorToPdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using iTextSharp.text;
 
 namespace Facilis.MVC.Controllers
 {
@@ -192,14 +193,42 @@ namespace Facilis.MVC.Controllers
             return RedirectToAction("ControleParticipantes", new { id = eventoId });
         }
 
-        public ActionResult Cracha(int id)
+        public ActionResult Cracha(int id, int eventoId)
         {
-             return new ViewAsPdf();
+            var participante = _participanteApp.GetById(id);
+            var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
+
+            var evento = _eventoApp.GetById(eventoId);
+            var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+            var usuario = _userManager.FindById(participante.UsuarioId);
+            var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+
+            participanteViewModel.EventoViewModel = eventoViewModel;
+            participanteViewModel.UsuarioViewModel = usuarioViewModel;
+
+            return new PdfActionResult("Cracha", participanteViewModel);
         }
 
-        public ActionResult Certificado(int id)
+        public ActionResult Certificado(int id, int eventoId)
         {
-            return new ViewAsPdf();
+            var participante = _participanteApp.GetById(id);
+            var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
+
+            var evento = _eventoApp.GetById(eventoId);
+            var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+            var usuario = _userManager.FindById(participante.UsuarioId);
+            var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+
+            participanteViewModel.EventoViewModel = eventoViewModel;
+            participanteViewModel.UsuarioViewModel = usuarioViewModel;
+
+            return new PdfActionResult("Certificado", participanteViewModel, (writer, document) =>
+            {
+                document.SetPageSize(new Rectangle(1000f, 500f, 90));
+                document.NewPage(); 
+            });
         }
 
         private void CarregarDropDownFormaPagamento()

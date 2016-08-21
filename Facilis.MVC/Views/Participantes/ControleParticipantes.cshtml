@@ -52,9 +52,9 @@
                     @Html.DisplayFor(modelItem => item.Certificado)
                 </td>
                 <td>
-                    @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId, eventoId = item.EventoId }) |
+                    @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" }) |
                     @Html.ActionLink("Marcar Presença", "MarcarPresenca", new { id = item.ParticipanteId, eventoId = item.EventoId }) |
-                    @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId, eventoId = item.EventoId })
+                    @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" })
                 </td>
             </tr>
         }

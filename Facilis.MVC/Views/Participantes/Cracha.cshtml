@@ -1,8 +1,12 @@
 ﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
 
+@{
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+
 <h2>Cracha</h2>
-<h3>Nome do evento</h3>
+<h3>@Model.EventoViewModel.Nome</h3>
 <hr />
-<h2>Nome do participante</h2>
-<h4>Sobrenome do participante</h4>
+<h2>@Model.UsuarioViewModel.Nome</h2>
+<h4>@Model.UsuarioViewModel.Sobrenome</h4>
 
