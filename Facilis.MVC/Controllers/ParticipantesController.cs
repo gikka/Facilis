@@ -231,6 +231,27 @@ namespace Facilis.MVC.Controllers
             });
         }
 
+        public ActionResult ImprimirListaPresenca()
+        {
+            //var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.GetAll();
+            //var evento = _eventoApp.GetById(id);
+
+            var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
+
+            //ViewBag.Evento = evento.Nome;
+
+            foreach (ParticipanteViewModel p in participanteViewModel)
+            {
+                var usuario = _userManager.FindById(p.UsuarioId);
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+                p.UsuarioViewModel = usuarioViewModel;
+               
+            }
+
+            return new PdfActionResult("ListaParticipantes", participanteViewModel);
+        }
+
         // GET: 
         public ActionResult GraficoPorRegiao()
         {

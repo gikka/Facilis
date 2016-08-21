@@ -10,8 +10,6 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-
     <table class="table table-hover">
         <tr>
             <th>
@@ -34,30 +32,36 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UsuarioViewModel.Nome)
-                    @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sobrenome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataInscricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cracha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Presenca)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Certificado)
-                </td>
-                <td>
-                    @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" }) |
-                    @Html.ActionLink("Marcar Presença", "MarcarPresenca", new { id = item.ParticipanteId, eventoId = item.EventoId }) |
-                    @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioViewModel.Nome)
+                @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sobrenome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataInscricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cracha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Presenca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Certificado)
+            </td>
+            <td>
+                @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" }) |
+                @Html.ActionLink("Marcar Presença", "MarcarPresenca", new { id = item.ParticipanteId, eventoId = item.EventoId }) |
+                @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" })
+            </td>
+        </tr>
         }
 
     </table>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.ActionLink("Imprimir lista de presença", "ImprimirListaPresenca", new { target = "_blank" })
+        </div>
+    </div>
 }

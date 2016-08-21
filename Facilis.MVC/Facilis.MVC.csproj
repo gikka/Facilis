@@ -315,6 +315,7 @@
     <Content Include="Views\Shared\_LayoutPdf.cshtml" />
     <Content Include="Views\Participantes\GraficoPorRegiao.cshtml" />
     <Content Include="Views\Participantes\GraficoPorSexo.cshtml" />
+    <Content Include="Views\Participantes\ListaParticipantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

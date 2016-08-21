@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.ParticipanteViewModel>
+
+@{
+    ViewBag.Title = "ListaParticipantes";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+
+<h2>Lista dos Participantes</h2>
+<h4>@ViewBag.Evento</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioViewModel.Nome)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioViewModel.Nome)
+            @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sobrenome)
+        </td>
+    </tr>
+}
+
+</table>
