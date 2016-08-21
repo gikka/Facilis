@@ -30,5 +30,14 @@ namespace Facilis.Domain.Services
             _participanteRepository.MarcarPresenca(id);
         }
 
+        public IEnumerable<Participante> ContarPorRegiao(int eventoId)
+        {
+            return _participanteRepository.ContarPorRegiao(eventoId);
+        }
+
+        public IEnumerable<Participante> ContarPorSexo(int eventoId)
+        {
+            return _participanteRepository.ContarPorSexo(eventoId);
+        }
     }
 }

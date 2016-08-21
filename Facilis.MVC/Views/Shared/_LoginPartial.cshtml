@@ -14,6 +14,16 @@
             <li>@Html.ActionLink("Meus Eventos", "Index", "Eventos", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Novo Evento", "Create", "Eventos", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             <li>@Html.ActionLink("Cupons", "Index", "Cupons", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relatórios <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Gráfico por Região", "GraficoPorRegiao", "Participantes", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Gráfico por Sexo", "GraficoPorSexo", "Participantes", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li role="separator" class="divider"></li>
+                    <li>@Html.ActionLink("Relatório por pegião", "RelatorioPorRegiao", "Participantes", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Relatório por sexo", "RelatorioPorSexo", "Participantes", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                </ul>
+            </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
         </ul>
     }

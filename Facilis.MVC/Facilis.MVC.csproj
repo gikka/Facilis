@@ -313,6 +313,8 @@
     <Content Include="Views\Participantes\Cracha.cshtml" />
     <Content Include="Views\Participantes\Certificado.cshtml" />
     <Content Include="Views\Shared\_LayoutPdf.cshtml" />
+    <Content Include="Views\Participantes\GraficoPorRegiao.cshtml" />
+    <Content Include="Views\Participantes\GraficoPorSexo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

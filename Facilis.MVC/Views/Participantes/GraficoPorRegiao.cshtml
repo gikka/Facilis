@@ -1,0 +1,67 @@
+﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
+@{
+    ViewBag.Title = "GraficoPorRegiao";
+}
+
+<h2>Gráfico Por Região</h2>
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.LabelFor(model => model.EventoViewModel.Nome, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.EventoId, ViewBag.EventoList as SelectList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6">
+        <input id="btnEmitir" type="submit" value="Emitir" class="btn btn-primary" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!--Div that will hold the pie chart-->
+        <div id="chart_div"></div>
+    </div>
+</div>
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    $(document).ready(function () {
+        $("#btnEmitir").click(function () {
+            var eventoId = $("#EventoId").val()
+            if (eventoId > 0) {
+                buscarRegioes(eventoId);
+            }
+        });
+    });
+
+    function buscarRegioes(eventoId) {
+        $.getJSON('@Url.Action("ContarPorRegiao")?eventoId=' + eventoId, listaPorRegiaoCallBack);
+    }
+
+    function listaPorRegiaoCallBack(json) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        $(json).each(function () {
+            data.addRows([
+                            [this.Usuario.Cidade.Nome + " - " +  this.Usuario.Estado.Sigla, 3]
+            ]);
+        });
+
+        var options = {
+            'title': 'Inscritos por Região',
+            'width': 600,
+            'height': 400
+        };
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

@@ -231,6 +231,32 @@ namespace Facilis.MVC.Controllers
             });
         }
 
+        // GET: 
+        public ActionResult GraficoPorRegiao()
+        {
+            CarregarDropDownEvento(null);
+
+            return View();
+        }
+
+        //POST
+        [AllowAnonymous]
+        public ActionResult ContarPorRegiao(int eventoId) => Json(_participanteApp.ContarPorRegiao(eventoId).ToList(), JsonRequestBehavior.AllowGet);
+
+
+        // GET: 
+        public ActionResult GraficoPorSexo()
+        {
+            CarregarDropDownEvento(null);
+
+            return View();
+        }
+
+        //POST
+        [AllowAnonymous]
+        public ActionResult ContarPorSexo(int eventoId) => Json(_participanteApp.ContarPorSexo(eventoId).ToList(), JsonRequestBehavior.AllowGet);
+
+
         private void CarregarDropDownFormaPagamento()
         {
             var FormaPagamentoList = new List<dynamic>();

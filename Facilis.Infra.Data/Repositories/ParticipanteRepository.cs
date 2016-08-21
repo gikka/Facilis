@@ -22,5 +22,18 @@ namespace Facilis.Infra.Data.Repositories
             Db.Participantes.Find(id).Presenca = true;
             Db.SaveChanges();
         }
+
+        public IEnumerable<Participante> ContarPorRegiao(int eventoId)
+        {
+            return Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null);
+        }
+
+        public IEnumerable<Participante> ContarPorSexo(int eventoId)
+        {
+            var lista = Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null);
+
+            return lista;
+        }
+
     }
 }

@@ -28,5 +28,15 @@ namespace Facilis.Application
         {
             _participanteService.MarcarPresenca(id);
         }
+
+        public IEnumerable<Participante> ContarPorRegiao(int eventoId)
+        {
+            return _participanteService.ContarPorRegiao(eventoId);
+        }
+
+        public IEnumerable<Participante> ContarPorSexo(int eventoId)
+        {
+            return _participanteService.ContarPorSexo(eventoId);
+        }
     }
 }
