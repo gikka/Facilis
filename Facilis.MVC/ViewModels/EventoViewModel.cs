@@ -70,5 +70,7 @@ namespace Facilis.MVC.ViewModels
 
         public virtual IEnumerable<ArquivoViewModel> Arquivos { get; set; }
         public virtual IEnumerable<VideoViewModel> Videos { get; set; }
+
+        public string DescricaoCurta { get { return Descricao.Length <= 100 ? Descricao : Descricao.Substring(0, 100) + "..."; } }
     }
 }

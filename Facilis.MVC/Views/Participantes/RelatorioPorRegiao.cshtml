@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.ParticipanteViewModel>
+@{
+    ViewBag.Title = "RelatorioPorRegiao";
+    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
+}
+
+<h2>RelatorioPorRegiao</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioViewModel.Estado.Sigla)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioViewModel.Cidade.Nome)
+        </th>
+        <th>
+            @Html.DisplayText("Quantidade")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioViewModel.Estado.Sigla)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioViewModel.Cidade.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioId)
+            </td>
+        </tr>
+    }
+
+</table>
+

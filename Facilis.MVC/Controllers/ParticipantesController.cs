@@ -4,13 +4,13 @@ using Facilis.Domain.Entities;
 using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.Infra.CrossCutting.Identity.Model;
 using Facilis.MVC.ViewModels;
+using iTextSharp.text;
 using Microsoft.AspNet.Identity;
 using MvcRazorToPdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using iTextSharp.text;
 
 namespace Facilis.MVC.Controllers
 {
@@ -251,6 +251,48 @@ namespace Facilis.MVC.Controllers
 
             return new PdfActionResult("ListaParticipantes", participanteViewModel);
         }
+
+        public ActionResult RelatorioPorRegiao()
+        {
+            //var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.GetAll();
+            //var evento = _eventoApp.GetById(id);
+
+            var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
+
+            //ViewBag.Evento = evento.Nome;
+
+            foreach (ParticipanteViewModel p in participanteViewModel)
+            {
+                var usuario = _userManager.FindById(p.UsuarioId);
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+                p.UsuarioViewModel = usuarioViewModel;
+
+            }
+
+            return new PdfActionResult("RelatorioPorRegiao", participanteViewModel);
+        }
+
+        public ActionResult RelatorioPorSexo()
+        {
+            //var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.GetAll();
+            //var evento = _eventoApp.GetById(id);
+
+            var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
+
+            //ViewBag.Evento = evento.Nome;
+
+            foreach (ParticipanteViewModel p in participanteViewModel)
+            {
+                var usuario = _userManager.FindById(p.UsuarioId);
+                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
+                p.UsuarioViewModel = usuarioViewModel;
+
+            }
+            return new PdfActionResult("RelatorioPorSexo", participanteViewModel);
+        }
+
 
         // GET: 
         public ActionResult GraficoPorRegiao()

@@ -1,0 +1,32 @@
+﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
+@{
+    ViewBag.Title = "EnviarEmail";
+}
+
+<h2>Enviar e-mail</h2>
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.LabelFor(model => model.EventoViewModel.Nome, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.EventoId, ViewBag.EventoList as SelectList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.DisplayName("Assunto")
+
+    </div>
+</div>
+<h2>Enviar e-mail</h2>
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.DisplayName("Assunto")
+    </div>
+</div>
+<h2>Enviar e-mail</h2>
+<div class="row">
+    <div class="form-group col-md-6">
+        <input id="btnEnviar" type="submit" value="Enviar" class="btn btn-primary" />
+    </div>
+</div>
+

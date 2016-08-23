@@ -223,6 +223,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParticipantesController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +317,9 @@
     <Content Include="Views\Participantes\GraficoPorRegiao.cshtml" />
     <Content Include="Views\Participantes\GraficoPorSexo.cshtml" />
     <Content Include="Views\Participantes\ListaParticipantes.cshtml" />
+    <Content Include="Views\Participantes\RelatorioPorSexo.cshtml" />
+    <Content Include="Views\Participantes\RelatorioPorRegiao.cshtml" />
+    <Content Include="Views\Participantes\EnviarEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
