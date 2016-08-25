@@ -10,22 +10,21 @@ namespace Facilis.MVC
 {
     public class EmailService
     {
-        public static Task SendAsync(string assunto, string mensagem, IEnumerable<string> destinatarios)
+        public static Task SendAsync(string assunto, string mensagem, List<string> destinatarios)
         {
-
-            var text = HttpUtility.HtmlEncode(mensagem);
 
             var msg = new MailMessage { From = new MailAddress("facilis.sge@gmail.com", "Facilis") };
 
 
             foreach (var item in destinatarios)
             {
-                msg.To.Add(new MailAddress(item));
+                msg.Bcc.Add(new MailAddress(item));
             }
 
+            msg.IsBodyHtml = true;
             msg.Subject = assunto;
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Plain));
-            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(text, null, MediaTypeNames.Text.Html));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(mensagem, null, MediaTypeNames.Text.Plain));
+            msg.AlternateViews.Add(AlternateView.CreateAlternateViewFromString(mensagem, null, MediaTypeNames.Text.Html));
 
             using (var smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32(587)))
             {

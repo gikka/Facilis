@@ -34,6 +34,5 @@ namespace Facilis.Infra.Data.Repositories
 
             return lista;
         }
-
     }
 }

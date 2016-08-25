@@ -98,6 +98,14 @@ namespace Facilis.MVC.Controllers
                 participanteDomain.DataCancelamento = null;
                 _participanteApp.Add(participanteDomain);
 
+                //enviar e-mail confirmando que a inscrição for realizada
+                var assunto = "Inscrição confirmada";
+                var mensagem = string.Format("Sua inscrição no evento {0} em {1} {2} foi realizada com sucesso!", evento.Nome, evento.DataInicial, evento.HoraInicial);
+                var destinatario = new List<string>();
+                destinatario.Add(usuario.Email);
+
+                EmailService.SendAsync(assunto, mensagem, destinatario);
+
                 return RedirectToAction("Index");
             }
 
@@ -136,6 +144,7 @@ namespace Facilis.MVC.Controllers
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
             ViewBag.Evento = evento.Nome;
+            ViewBag.EventoId = evento.EventoId;
 
             foreach (ParticipanteViewModel p in participanteViewModel)
             {

@@ -20,6 +20,7 @@ namespace Facilis.MVC.AutoMapper
             Mapper.CreateMap<ArquivoViewModel, Arquivo>();
             Mapper.CreateMap<VideoViewModel, Video>();
             Mapper.CreateMap<ParticipanteViewModel, Participante>();
+            Mapper.CreateMap<EmailViewModel, Email>();
         }
     }
 }

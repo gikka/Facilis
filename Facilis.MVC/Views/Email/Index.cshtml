@@ -1,0 +1,59 @@
+﻿@model Facilis.MVC.ViewModels.EmailViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+<!-- Script to wire up your TinyMCE editor -->
+<script type="text/javascript">
+    // Initialize your tinyMCE Editor with your preferred options
+    tinyMCE.init({
+        // General options
+        mode: "textareas",
+        height: 200,
+        menubar: false,
+        theme: "modern",
+        // Theme options
+        theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline, strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|, search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|, link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+        theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|, sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+        theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|, styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,  visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+        theme_advanced_toolbar_location: "top",
+        theme_advanced_toolbar_align: "left",
+        theme_advanced_statusbar_location: "bottom",
+        theme_advanced_resizing: true,
+        plugins: "fullpage",
+        fullpage_default_doctype: "<!DOCTYPE html>"
+
+        // Example content CSS (should be your site CSS)
+        //content_css: "Content/Site.css",
+    });
+</script>
+<h2>Enviar e-mail</h2>
+<h3>@Model.EventoViewModel.Nome</h3>
+<p>*Esse e-mail será enviado para todos os inscritos no evento.</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.EventoId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Assunto)
+        @Html.EditorFor(model => Model.Assunto, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Assunto, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Conteúdo do e-mail")
+        @Html.TextAreaFor(model => model.HtmlContent)
+        @Html.ValidationMessageFor(model => model.HtmlContent, "", new { @class = "text-danger" })
+    </div>
+    <p>@Html.ValidationMessage("", new { @class = "text-success" })</p>
+    <div class="form-group">
+        <input type="submit" value="Enviar" class="btn btn-primary" />
+        @Html.ActionLink("Voltar", "ControleParticipantes", "Participantes", new { id = Model.EventoViewModel.EventoId }, new { @class = "btn btn-default" })
+    </div>
+
+}
+
+
+
