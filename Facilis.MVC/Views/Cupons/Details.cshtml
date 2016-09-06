@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes cupom de desconto</h2>
 
 <div>
-    <h4>CupomViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -47,20 +46,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EventoId)
+            @Html.DisplayFor(model => model.Evento.Nome)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UsuarioId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UsuarioId)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CupomId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.CupomId }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
 </p>
