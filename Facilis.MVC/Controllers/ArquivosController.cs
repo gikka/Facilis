@@ -12,15 +12,18 @@ namespace Facilis.MVC.Controllers
     public class ArquivosController : Controller
     {
         private readonly IArquivoAppService _arquivoApp;
+        private readonly IEventoAppService _eventoApp;
 
-        public ArquivosController(IArquivoAppService arquivoApp)
+        public ArquivosController(IArquivoAppService arquivoApp, IEventoAppService eventoApp)
         {
             _arquivoApp = arquivoApp;
+            _eventoApp = eventoApp;
         }
 
         // GET: Arquivos
         public ActionResult Index(int id)
         {
+            ViewBag.EventoId = id;
             var listaArquivos = _arquivoApp.ListarPorEvento(id);
             var arquivoViewModel = Mapper.Map<IEnumerable<Arquivo>, IEnumerable<ArquivoViewModel>>(listaArquivos);
 
@@ -39,8 +42,10 @@ namespace Facilis.MVC.Controllers
         }
 
         // GET: Arquivo/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.Evento = _eventoApp.GetById(id).Nome;
+            ViewBag.EventoId = id;
             return View();
         }
 
@@ -76,7 +81,7 @@ namespace Facilis.MVC.Controllers
         {
             var arquivo = _arquivoApp.GetById(id);
             var arquivoViewModel = Mapper.Map<Arquivo, ArquivoViewModel>(arquivo);
-
+            ViewBag.EventoId = arquivo.EventoId;
             return View(arquivoViewModel);
         }
 
@@ -116,6 +121,13 @@ namespace Facilis.MVC.Controllers
             _arquivoApp.Remove(arquivo);
 
             return RedirectToAction("Edit", "Eventos", new { id = arquivo.EventoId });
+        }
+
+        public FileContentResult Download(int id)
+        {
+            var arquivo = _arquivoApp.GetById(id);
+
+            return File(arquivo.Content, arquivo.ContentType);
         }
     }
 }

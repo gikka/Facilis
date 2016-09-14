@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Facilis.MVC.ViewModels.ArquivoViewModel>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Arquivos")
+    @Html.ActionLink("Novo", "Create", "Arquivos", new { id = ViewData.ContainsKey("id") ? this.ViewData["id"].ToString() : string.Empty }, null)
 </p>
 <table class="table table-hover">
     <tr>
@@ -23,9 +23,9 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } }) |
-            @Html.ActionLink("Details", "Details", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } }) |
-            @Html.ActionLink("Delete", "Delete", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ActionLink("Editar", "Edit", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } }) |
+            @Html.ActionLink("Detalhes", "Details", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } }) |
+            @Html.ActionLink("Excluir", "Delete", "Arquivos", new { id=item.ArquivoId }, new { htmlAttributes = new { @class = "form-control" } })
         </td>
     </tr>
 }

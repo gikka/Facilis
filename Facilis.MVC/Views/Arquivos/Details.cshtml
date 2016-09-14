@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Detalhes arquivo</h2>
 
 <div>
-    <h4>ArquivoViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,25 +25,12 @@
             @Html.DisplayFor(model => model.Descricao)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ContentType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContentType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventoId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventoId)
-        </dd>
-
+        <dd>@Html.ActionLink("Ver arquivo","Download", new { id = Model.ArquivoId})</dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ArquivoId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="form-group row">
+    <div class="col-md-12">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.ArquivoId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Voltar", "Edit", "Eventos", new { id = Model.EventoId }, new { @class = "btn btn-default" })
+    </div>
+</div>
