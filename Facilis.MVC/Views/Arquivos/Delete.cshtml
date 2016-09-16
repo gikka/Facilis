@@ -30,7 +30,9 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+        <p>
+            @Html.ActionLink("Ver arquivo", "Download", new { id = Model.ArquivoId }, new { target = "_blank" })
+        </p>
         <div class="form-group row">
             <div class="col-md-12">
                 <input type="submit" value="Excluir" class="btn btn-danger" />

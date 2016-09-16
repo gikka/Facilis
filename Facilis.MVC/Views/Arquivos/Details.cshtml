@@ -24,10 +24,11 @@
         <dd>
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-
-        <dd>@Html.ActionLink("Ver arquivo","Download", new { id = Model.ArquivoId})</dd>
-    </dl>
+</dl>
 </div>
+<p>
+    @Html.ActionLink("Ver arquivo", "Download", new { id = Model.ArquivoId }, new { target = "_blank" })
+</p>
 <div class="form-group row">
     <div class="col-md-12">
         @Html.ActionLink("Editar", "Edit", new { id = Model.ArquivoId }, new { @class = "btn btn-primary" })
