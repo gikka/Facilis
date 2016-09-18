@@ -36,6 +36,9 @@ namespace Facilis.MVC.Controllers
         public ActionResult Details(int id)
         {
             var evento = _eventoApp.GetById(id);
+            
+            evento.Arquivos = _arquivoApp.ListarPorEvento(id);
+            evento.Videos = _videoApp.ListarPorEvento(id);
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
             return View(eventoViewModel);
@@ -120,6 +123,9 @@ namespace Facilis.MVC.Controllers
         public ActionResult DetalhesInscricao(int id)
         {
             var evento = _eventoApp.GetById(id);
+            evento.Arquivos = _arquivoApp.ListarPorEvento(id);
+            evento.Videos = _videoApp.ListarPorEvento(id);
+
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
             return View(eventoViewModel);

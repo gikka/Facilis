@@ -103,7 +103,7 @@
                         Vídeos
                     </div>
                     <div class="panel-body">
-                        @Html.Partial("~/Views/Videos/Index.cshtml", Model.Videos)
+                        @Html.Partial("~/Views/Videos/Index.cshtml", Model.Videos, new ViewDataDictionary { { "id", Model.EventoId.ToString() } })
                     </div>
                 </div>
             </div>

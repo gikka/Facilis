@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Facilis.MVC.ViewModels.VideoViewModel>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.URL)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.URL)
+            </td>
+            <td>
+                @Html.ActionLink("Ver vídeo", "Download", "Videos", new { id = item.VideoId }, new { target = "_blank" }) 
+            </td>
+        </tr>
+    }
+
+</table>

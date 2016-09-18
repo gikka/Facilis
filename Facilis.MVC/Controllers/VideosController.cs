@@ -11,10 +11,12 @@ namespace Facilis.MVC.Controllers
     public class VideosController : Controller
     {
         private readonly IVideoAppService _videoApp;
+        private readonly IEventoAppService _eventoApp;
 
-        public VideosController(IVideoAppService videoApp)
+        public VideosController(IVideoAppService videoApp, IEventoAppService eventoApp)
         {
             _videoApp = videoApp;
+            _eventoApp = eventoApp;
         }
 
         // GET: Videos
@@ -36,8 +38,10 @@ namespace Facilis.MVC.Controllers
         }
 
         // GET: Videos/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.Evento = _eventoApp.GetById(id).Nome;
+            ViewBag.EventoId = id;
             return View();
         }
 
