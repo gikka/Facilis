@@ -93,7 +93,13 @@ namespace Facilis.MVC.Controllers
 
             if (ModelState.IsValid)
             {
+
+                var arquivoAntigo = _arquivoApp.GetById(arquivo.ArquivoId);
                 var arquivoDomain = Mapper.Map<ArquivoViewModel, Arquivo>(arquivo);
+
+                arquivoDomain.ContentType = arquivoAntigo.ContentType;
+                arquivoDomain.Content = arquivoAntigo.Content;
+
                 _arquivoApp.Update(arquivoDomain);
 
                 return RedirectToAction("Edit", "Eventos", new { id = arquivo.EventoId });
