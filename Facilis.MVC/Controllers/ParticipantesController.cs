@@ -59,7 +59,7 @@ namespace Facilis.MVC.Controllers
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
             participanteViewModel.UsuarioViewModel = usuarioViewModel;
-            participanteViewModel.EventoViewModel = eventoViewModel;
+            participanteViewModel.Evento = eventoViewModel;
 
             CarregarDropDownFormaPagamento();
 
@@ -84,7 +84,7 @@ namespace Facilis.MVC.Controllers
                 var usuario = _userManager.FindById(User.Identity.GetUserId());
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
-                participante.EventoViewModel = eventoViewModel;
+                participante.Evento = eventoViewModel;
                 participante.UsuarioViewModel = usuarioViewModel;
 
                 //não permitir que o usuário se inscreva nos próprios eventos
@@ -174,7 +174,7 @@ namespace Facilis.MVC.Controllers
                 var usuario = _userManager.FindById(User.Identity.GetUserId());
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
-                participante.EventoViewModel = eventoViewModel;
+                participante.Evento = eventoViewModel;
                 participante.UsuarioViewModel = usuarioViewModel;
 
                 //não permitir que o usuário se inscreva nos próprios eventos
@@ -213,7 +213,7 @@ namespace Facilis.MVC.Controllers
             var usuario = _userManager.FindById(participante.UsuarioId);
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
-            participanteViewModel.EventoViewModel = eventoViewModel;
+            participanteViewModel.Evento = eventoViewModel;
             participanteViewModel.UsuarioViewModel = usuarioViewModel;
 
             return new PdfActionResult("Cracha", participanteViewModel);
@@ -230,7 +230,7 @@ namespace Facilis.MVC.Controllers
             var usuario = _userManager.FindById(participante.UsuarioId);
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
-            participanteViewModel.EventoViewModel = eventoViewModel;
+            participanteViewModel.Evento = eventoViewModel;
             participanteViewModel.UsuarioViewModel = usuarioViewModel;
 
             return new PdfActionResult("Certificado", participanteViewModel, (writer, document) =>

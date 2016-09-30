@@ -20,6 +20,9 @@ namespace Facilis.MVC.ViewModels
 
         [Display(Name = "Presença")]
         public bool Presenca { get; set; }
+
+        [Display(Name = "Data de cancelamento")]
+        [DataType(DataType.DateTime)]
         public DateTime ?DataCancelamento { get; set; }
 
         [Display(Name = "Data de inscrição")]
@@ -32,8 +35,9 @@ namespace Facilis.MVC.ViewModels
         public string UsuarioId { get; set; }
         public virtual RegisterViewModel UsuarioViewModel { get; set; }
 
+        [Display(Name = "Evento")]
         public int EventoId { get; set; }
-        public virtual EventoViewModel EventoViewModel { get; set; }
+        public virtual EventoViewModel Evento { get; set; }
 
         public int? CupomId { get; set; }
         public virtual CupomViewModel CupomViewModel { get; set; }

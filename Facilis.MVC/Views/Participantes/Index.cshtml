@@ -4,33 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Minhas Inscrições</h2>
 
 <table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Cracha)
+            @Html.DisplayNameFor(model => model.EventoId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brinde)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Certificado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Presenca)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataCancelamento)
+            @Html.DisplayNameFor(model => model.Evento.DataInicial)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DataInscricao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EventoId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CupomId)
+            @Html.DisplayNameFor(model => model.DataCancelamento)
         </th>
         <th></th>
     </tr>
@@ -38,30 +26,20 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Cracha)
+            @Html.DisplayFor(modelItem => item.Evento.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Brinde)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Certificado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Presenca)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataCancelamento)
+            @Html.DisplayFor(modelItem => item.Evento.DataInicial)
+            @Html.DisplayFor(modelItem => item.Evento.HoraInicial)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DataInscricao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EventoId)
+            @Html.DisplayFor(modelItem => item.DataCancelamento)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CupomId)
-        </td>
-        <td>
+            @Html.ActionLink("Ver evento", "DetalhesInscricao", "Eventos", new { id = item.EventoId }, null) |
             @Html.ActionLink("Cancelar inscrição", "CancelarInscricao", new { id=item.ParticipanteId }) 
         </td>
     </tr>
