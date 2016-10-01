@@ -1,31 +1,33 @@
-﻿@model IEnumerable<Facilis.MVC.ViewModels.ParticipanteViewModel>
+﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
 @{
     ViewBag.Title = "RelatorioPorSexo";
-    Layout = "~/Views/Shared/_LayoutPdf.cshtml";
 }
 
-<h2>RelatorioPorSexo</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioViewModel.Sexo)
-        </th>
-        <th>
-            @Html.DisplayText("Quantidade")
-        </th>
-    </tr>
+<h2>Relatório Por Sexo</h2>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sexo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UsuarioId)
-            </td>
-        </tr>
-    }
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.LabelFor(model => model.Evento.Nome, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.EventoId, ViewBag.EventoList as SelectList, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6">
+        @Html.ActionLink("Emitir", "RelatorioPorSexoImpressao", "Participantes", new { id = "0" }, new { @id="emitir", @class = "btn btn-primary", target = "_blank" })
+    </div>
+</div>
 
-</table>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#EventoId").change(function (e) {
+            var eventoId = $("#EventoId").val();
+            if (eventoId > 0) {
+                e.preventDefault();
+                var newUrl = $("#emitir").prop('href').replace('0', eventoId);
+                $("#emitir").prop('href', newUrl);
+            }
+        });
+    });
+</script>

@@ -33,7 +33,7 @@ namespace Facilis.MVC.ViewModels
         public int ?FormaPagamento { get; set; }
 
         public string UsuarioId { get; set; }
-        public virtual RegisterViewModel UsuarioViewModel { get; set; }
+        public virtual RegisterViewModel Usuario { get; set; }
 
         [Display(Name = "Evento")]
         public int EventoId { get; set; }
@@ -41,5 +41,13 @@ namespace Facilis.MVC.ViewModels
 
         public int? CupomId { get; set; }
         public virtual CupomViewModel CupomViewModel { get; set; }
+
+        //****usado apenas nos relatórios e gráficos
+        [Display(Name = "Quantidade")]
+        public int Quantidade { get; set; }
+
+        public IEnumerable<EstadoViewModel>Estado { get; set; }
+        public IEnumerable<CidadeViewModel> Cidade { get; set; }
+        //****
     }
 }

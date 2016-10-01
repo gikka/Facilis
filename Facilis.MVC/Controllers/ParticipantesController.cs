@@ -58,7 +58,7 @@ namespace Facilis.MVC.Controllers
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
-            participanteViewModel.UsuarioViewModel = usuarioViewModel;
+            participanteViewModel.Usuario = usuarioViewModel;
             participanteViewModel.Evento = eventoViewModel;
 
             CarregarDropDownFormaPagamento();
@@ -85,7 +85,7 @@ namespace Facilis.MVC.Controllers
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
                 participante.Evento = eventoViewModel;
-                participante.UsuarioViewModel = usuarioViewModel;
+                participante.Usuario = usuarioViewModel;
 
                 //não permitir que o usuário se inscreva nos próprios eventos
                 if (participanteDomain.UsuarioId == evento.UsuarioId)
@@ -150,7 +150,7 @@ namespace Facilis.MVC.Controllers
             {
                 var usuario = _userManager.FindById(p.UsuarioId);
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-                p.UsuarioViewModel = usuarioViewModel;
+                p.Usuario = usuarioViewModel;
             }
 
             return View(participanteViewModel);
@@ -175,7 +175,7 @@ namespace Facilis.MVC.Controllers
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
                 participante.Evento = eventoViewModel;
-                participante.UsuarioViewModel = usuarioViewModel;
+                participante.Usuario = usuarioViewModel;
 
                 //não permitir que o usuário se inscreva nos próprios eventos
                 if (participanteDomain.UsuarioId == evento.UsuarioId)
@@ -214,7 +214,7 @@ namespace Facilis.MVC.Controllers
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
             participanteViewModel.Evento = eventoViewModel;
-            participanteViewModel.UsuarioViewModel = usuarioViewModel;
+            participanteViewModel.Usuario = usuarioViewModel;
 
             return new PdfActionResult("Cracha", participanteViewModel);
         }
@@ -231,12 +231,12 @@ namespace Facilis.MVC.Controllers
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
 
             participanteViewModel.Evento = eventoViewModel;
-            participanteViewModel.UsuarioViewModel = usuarioViewModel;
+            participanteViewModel.Usuario = usuarioViewModel;
 
             return new PdfActionResult("Certificado", participanteViewModel, (writer, document) =>
             {
                 document.SetPageSize(new Rectangle(1000f, 500f, 90));
-                document.NewPage(); 
+                document.NewPage();
             });
         }
 
@@ -254,8 +254,8 @@ namespace Facilis.MVC.Controllers
             {
                 var usuario = _userManager.FindById(p.UsuarioId);
                 var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-                p.UsuarioViewModel = usuarioViewModel;
-               
+                p.Usuario = usuarioViewModel;
+
             }
 
             return new PdfActionResult("ListaParticipantes", participanteViewModel);
@@ -263,43 +263,62 @@ namespace Facilis.MVC.Controllers
 
         public ActionResult RelatorioPorRegiao()
         {
-            //var lista = _participanteApp.ListarInscritosPorEvento(id);
-            var lista = _participanteApp.GetAll();
-            //var evento = _eventoApp.GetById(id);
+            CarregarDropDownEvento(null);
+
+            return View();
+        }
+
+        public ActionResult RelatorioPorRegiaoImpressao(int id)
+        {
+            var lista = _participanteApp.ListarInscritosPorEvento(id);
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            //ViewBag.Evento = evento.Nome;
+            var listaAgrupada = (from p in participanteViewModel
+                                 group p by new { p.Usuario.Estado.Sigla, p.Usuario.Cidade.Nome }
+                                 into grp
+                                 select new ParticipanteViewModel
+                                 {
+                                     Usuario = new RegisterViewModel
+                                     {
+                                         Estado = new Estado { Sigla = grp.Key.Sigla },
+                                         Cidade = new Cidade { Nome = grp.Key.Nome }
+                                     },
+                                     Quantidade = grp.Count()
+                                 }).OrderBy(f => f.Usuario.Estado.Sigla).OrderBy(f => f.Usuario.Cidade.Nome);
 
-            foreach (ParticipanteViewModel p in participanteViewModel)
-            {
-                var usuario = _userManager.FindById(p.UsuarioId);
-                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-                p.UsuarioViewModel = usuarioViewModel;
+            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+            ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
 
-            }
-
-            return new PdfActionResult("RelatorioPorRegiao", participanteViewModel);
+            return new PdfActionResult("RelatorioPorRegiaoImpressao", listaAgrupada);
         }
 
         public ActionResult RelatorioPorSexo()
         {
-            //var lista = _participanteApp.ListarInscritosPorEvento(id);
-            var lista = _participanteApp.GetAll();
-            //var evento = _eventoApp.GetById(id);
+            CarregarDropDownEvento(null);
+
+            return View();
+        }
+
+        public ActionResult RelatorioPorSexoImpressao(int id)
+        {
+            var lista = _participanteApp.ListarInscritosPorEvento(id);
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            //ViewBag.Evento = evento.Nome;
+            var listaAgrupada = (from p in participanteViewModel
+                                 group p by new { p.Usuario.Sexo }
+                                 into grp
+                                 select new ParticipanteViewModel
+                                 {
+                                     Usuario = new RegisterViewModel { Sexo = grp.Key.Sexo == "F" ? "Feminino" : "Masculino" },
+                                     Quantidade = grp.Count()
+                                 });
 
-            foreach (ParticipanteViewModel p in participanteViewModel)
-            {
-                var usuario = _userManager.FindById(p.UsuarioId);
-                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-                p.UsuarioViewModel = usuarioViewModel;
+            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+            ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
 
-            }
-            return new PdfActionResult("RelatorioPorSexo", participanteViewModel);
+            return new PdfActionResult("RelatorioPorSexoImpressao", listaAgrupada);
         }
 
 
@@ -313,8 +332,15 @@ namespace Facilis.MVC.Controllers
 
         //POST
         [AllowAnonymous]
-        public ActionResult ContarPorRegiao(int eventoId) => Json(_participanteApp.ContarPorRegiao(eventoId).ToList(), JsonRequestBehavior.AllowGet);
-
+        public ActionResult ContarPorRegiao(int eventoId) => Json((from p in _participanteApp.ContarPorRegiao(eventoId).ToList()
+                                                                   group p by new { p.Usuario.Estado.Sigla, p.Usuario.Cidade.Nome }
+                                                                   into grp
+                                                                   select new
+                                                                   {
+                                                                       grp.Key.Sigla,
+                                                                       grp.Key.Nome,
+                                                                       Quantidade = grp.Count()
+                                                                   }).ToList(), JsonRequestBehavior.AllowGet);
 
         // GET: 
         public ActionResult GraficoPorSexo()
@@ -326,7 +352,14 @@ namespace Facilis.MVC.Controllers
 
         //POST
         [AllowAnonymous]
-        public ActionResult ContarPorSexo(int eventoId) => Json(_participanteApp.ContarPorSexo(eventoId).ToList(), JsonRequestBehavior.AllowGet);
+        public ActionResult ContarPorSexo(int eventoId) => Json((from p in _participanteApp.ContarPorSexo(eventoId).ToList()
+                                                                 group p by new { p.Usuario.Sexo }
+                                                                 into grp
+                                                                 select new
+                                                                 {
+                                                                     Sexo = grp.Key.Sexo == "F" ? "Feminino" : "Masculino",
+                                                                     Quantidade = grp.Count()
+                                                                 }).ToList(), JsonRequestBehavior.AllowGet);
 
 
         private void CarregarDropDownFormaPagamento()

@@ -547,6 +547,8 @@
     <Content Include="Views\Email\Index.cshtml" />
     <Content Include="Views\Arquivos\IndexDetalhes.cshtml" />
     <Content Include="Views\Videos\IndexDetalhes.cshtml" />
+    <Content Include="Views\Participantes\RelatorioPorSexoImpressao.cshtml" />
+    <Content Include="Views\Participantes\RelatorioPorRegiaoImpressao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

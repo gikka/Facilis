@@ -6,7 +6,7 @@
 <h2>Gráfico Por Região</h2>
 <div class="row">
     <div class="form-group col-md-6">
-        @Html.LabelFor(model => model.EventoViewModel.Nome, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(model => model.Evento.Nome, htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(model => model.EventoId, ViewBag.EventoList as SelectList, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.EventoId, "", new { @class = "text-danger" })
     </div>
@@ -50,7 +50,7 @@
         data.addColumn('number', 'Slices');
         $(json).each(function () {
             data.addRows([
-                            [this.Usuario.Cidade.Nome + " - " +  this.Usuario.Estado.Sigla, 3]
+                            [this.Nome + " - " + this.Sigla, this.Quantidade]
             ]);
         });
 
