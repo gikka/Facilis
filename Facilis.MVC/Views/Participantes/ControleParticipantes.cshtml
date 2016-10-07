@@ -13,14 +13,14 @@
     @Html.Hidden("eventoId" , (object)ViewBag.EventoId)
     <div class="row">
         <div class="form-group col-md-12">
-            @Html.ActionLink("Imprimir lista de presença", "ImprimirListaPresenca", new { target = "_blank" })
+            @Html.ActionLink("Imprimir lista de presença", "ImprimirListaPresenca", new { id = ViewBag.EventoId }, new { @class = "btn btn-primary" , @target = "_blank" })
             @Html.ActionLink("Enviar e-mail", "Index", "Email", new { id = ViewBag.EventoId }, new { @class = "btn btn-primary" })
         </div>
     </div>
     <table class="table table-hover">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UsuarioViewModel.Nome)
+                @Html.DisplayNameFor(model => model.Usuario.Nome)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataInscricao)
@@ -41,8 +41,8 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UsuarioViewModel.Nome)
-                    @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sobrenome)
+                    @Html.DisplayFor(modelItem => item.Usuario.Nome)
+                    @Html.DisplayFor(modelItem => item.Usuario.Sobrenome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataInscricao)
@@ -57,9 +57,9 @@
                     @Html.DisplayFor(modelItem => item.Certificado)
                 </td>
                 <td>
-                    @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" }) |
+                    @Html.ActionLink("Crachá", "Cracha", new { id = item.ParticipanteId }, new { target = "_blank" }) |
                     @Html.ActionLink("Marcar Presença", "MarcarPresenca", new { id = item.ParticipanteId, eventoId = item.EventoId }) |
-                    @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId, eventoId = item.EventoId }, new { target = "_blank" })
+                    @Html.ActionLink("Certificado", "Certificado", new { id = item.ParticipanteId }, new { target = "_blank" })
                 </td>
             </tr>
         }

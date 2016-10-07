@@ -202,36 +202,18 @@ namespace Facilis.MVC.Controllers
             return RedirectToAction("ControleParticipantes", new { id = eventoId });
         }
 
-        public ActionResult Cracha(int id, int eventoId)
+        public ActionResult Cracha(int id)
         {
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
-
-            var evento = _eventoApp.GetById(eventoId);
-            var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
-
-            var usuario = _userManager.FindById(participante.UsuarioId);
-            var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-
-            participanteViewModel.Evento = eventoViewModel;
-            participanteViewModel.Usuario = usuarioViewModel;
 
             return new PdfActionResult("Cracha", participanteViewModel);
         }
 
-        public ActionResult Certificado(int id, int eventoId)
+        public ActionResult Certificado(int id)
         {
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
-
-            var evento = _eventoApp.GetById(eventoId);
-            var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
-
-            var usuario = _userManager.FindById(participante.UsuarioId);
-            var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-
-            participanteViewModel.Evento = eventoViewModel;
-            participanteViewModel.Usuario = usuarioViewModel;
 
             return new PdfActionResult("Certificado", participanteViewModel, (writer, document) =>
             {
@@ -240,23 +222,13 @@ namespace Facilis.MVC.Controllers
             });
         }
 
-        public ActionResult ImprimirListaPresenca()
+        public ActionResult ImprimirListaPresenca(int id)
         {
-            //var lista = _participanteApp.ListarInscritosPorEvento(id);
-            var lista = _participanteApp.GetAll();
-            //var evento = _eventoApp.GetById(id);
+            var lista = _participanteApp.ListarInscritosPorEvento(id);
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            //ViewBag.Evento = evento.Nome;
-
-            foreach (ParticipanteViewModel p in participanteViewModel)
-            {
-                var usuario = _userManager.FindById(p.UsuarioId);
-                var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(usuario.usuario);
-                p.Usuario = usuarioViewModel;
-
-            }
+            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
 
             return new PdfActionResult("ListaParticipantes", participanteViewModel);
         }
@@ -315,8 +287,11 @@ namespace Facilis.MVC.Controllers
                                      Quantidade = grp.Count()
                                  });
 
-            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
-            ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
+            if (lista.Count() != 0)
+            {
+                ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+                ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
+            }
 
             return new PdfActionResult("RelatorioPorSexoImpressao", listaAgrupada);
         }

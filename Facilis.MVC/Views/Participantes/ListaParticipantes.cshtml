@@ -5,21 +5,26 @@
     Layout = "~/Views/Shared/_LayoutPdf.cshtml";
 }
 
-<h2>Lista dos Participantes</h2>
-<h4>@ViewBag.Evento</h4>
-
+<h2 class="page-header">Lista dos Participantes</h2>
+<h3 class="evento">Evento: @ViewBag.Evento</h3>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioViewModel.Nome)
+        <th class="th">
+            @Html.DisplayNameFor(model => model.Usuario.Nome)
+        </th>
+        <th class="th">
+            @Html.DisplayNameFor(model => model.Usuario.Email)
         </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioViewModel.Nome)
-            @Html.DisplayFor(modelItem => item.UsuarioViewModel.Sobrenome)
+        <td class="td">
+            @Html.DisplayFor(modelItem => item.Usuario.Nome)
+            @Html.DisplayFor(modelItem => item.Usuario.Sobrenome)
+        </td>
+        <td class="td">
+            @Html.DisplayFor(modelItem => item.Usuario.Email)
         </td>
     </tr>
 }
