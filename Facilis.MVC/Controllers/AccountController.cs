@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Facilis.Application.Interface;
 using Facilis.Domain.Entities;
 using System.Collections.Generic;
+using AutoMapper;
 
 namespace Facilis.MVC.Controllers
 {
@@ -76,7 +77,7 @@ namespace Facilis.MVC.Controllers
         public ActionResult Register()
         {
             ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome");
-            ViewBag.CidadeId = new SelectList(string.Empty , "CidadeId", "Nome");
+            ViewBag.CidadeId = new SelectList(string.Empty, "CidadeId", "Nome");
             CarregarDropDownSexo();
             return View();
         }
@@ -109,7 +110,7 @@ namespace Facilis.MVC.Controllers
                         EstadoId = model.EstadoId,
                         CidadeId = model.CidadeId,
                         Estado = model.Estado,
-                        Cidade = model.Cidade, 
+                        Cidade = model.Cidade,
                         Email = model.Email
                     }
                 };
@@ -142,17 +143,71 @@ namespace Facilis.MVC.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+
+        public ActionResult Edit(string id)
         {
-            if (userId == null || code == null)
+
+            var user = _userManager.FindById(id);
+            var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(user.usuario);
+            return View(usuarioViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                return View("Error");
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    usuario = new Usuario
+                    {
+                        Bairro = model.Bairro,
+                        Cep = model.Cep,
+                        Complemento = model.Complemento,
+                        DataNascimento = model.DataNascimento,
+                        Endereco = model.Endereco,
+                        Nome = model.Nome,
+                        Numero = model.Numero,
+                        Sexo = model.Sexo,
+                        Telefone = model.Telefone,
+                        Sobrenome = model.Sobrenome,
+                        EstadoId = model.EstadoId,
+                        CidadeId = model.CidadeId,
+                        Estado = model.Estado,
+                        Cidade = model.Cidade,
+                        Email = model.Email
+                    }
+                };
+
+                //para permitir relacionamento de usuario com outras entidades
+                user.usuario.Id = user.Id;
+
+                var result = await _userManager.CreateAsync(user, model.Senha);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
+                ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
+                CarregarDropDownSexo();
+                AddErrors(result);
+
+
             }
-            var result = await _userManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+
+            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
+            ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
+            CarregarDropDownSexo();
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         //

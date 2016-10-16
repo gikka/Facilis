@@ -15,6 +15,7 @@
         <div class="form-group col-md-12">
             @Html.ActionLink("Imprimir lista de presença", "ImprimirListaPresenca", new { id = ViewBag.EventoId }, new { @class = "btn btn-primary" , @target = "_blank" })
             @Html.ActionLink("Enviar e-mail", "Index", "Email", new { id = ViewBag.EventoId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Voltar", "Index", "Eventos",null, new { @class = "btn btn-default" })
         </div>
     </div>
     <table class="table table-hover">

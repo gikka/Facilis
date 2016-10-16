@@ -224,11 +224,12 @@ namespace Facilis.MVC.Controllers
 
         public ActionResult ImprimirListaPresenca(int id)
         {
-            var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.ListarInscritosPorEvento(id).Where(f => f.Presenca == true).ToList();
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+            if (lista.Count > 0)
+                ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
 
             return new PdfActionResult("ListaParticipantes", participanteViewModel);
         }
@@ -242,7 +243,7 @@ namespace Facilis.MVC.Controllers
 
         public ActionResult RelatorioPorRegiaoImpressao(int id)
         {
-            var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.ListarInscritosPorEvento(id).ToList();
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
@@ -259,8 +260,11 @@ namespace Facilis.MVC.Controllers
                                      Quantidade = grp.Count()
                                  }).OrderBy(f => f.Usuario.Estado.Sigla).OrderBy(f => f.Usuario.Cidade.Nome);
 
-            ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
-            ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
+            if (lista.Count > 0)
+            {
+                ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+                ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
+            }
 
             return new PdfActionResult("RelatorioPorRegiaoImpressao", listaAgrupada);
         }
@@ -274,7 +278,7 @@ namespace Facilis.MVC.Controllers
 
         public ActionResult RelatorioPorSexoImpressao(int id)
         {
-            var lista = _participanteApp.ListarInscritosPorEvento(id);
+            var lista = _participanteApp.ListarInscritosPorEvento(id).ToList();
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
@@ -287,7 +291,7 @@ namespace Facilis.MVC.Controllers
                                      Quantidade = grp.Count()
                                  });
 
-            if (lista.Count() != 0)
+            if (lista.Count > 0)
             {
                 ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
                 ViewBag.Total = listaAgrupada.Sum(f => f.Quantidade);
