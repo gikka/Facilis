@@ -236,9 +236,16 @@ namespace Facilis.MVC.Controllers
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id.ToString());
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await _userManager.SendEmailAsync(user.Id.ToString(), "Esqueci minha senha", "Por favor altere sua senha clicando aqui: <a href='" + callbackUrl + "'></a>");
-                ViewBag.Link = callbackUrl;
-                ViewBag.LinkAcesso = callbackUrl;
+
+
+                //enviar e-mail confirmando que a inscrição for realizada
+                var assunto = "Esqueci minha senha";
+                var mensagem = string.Format("Para alterar sua senha clique <a href='{0}'>aqui</a>", callbackUrl);
+                var destinatario = new List<string>();
+                destinatario.Add(model.Email);
+
+                await EmailService.SendAsync(assunto, mensagem, destinatario);
+
                 return View("ForgotPasswordConfirmation");
             }
 

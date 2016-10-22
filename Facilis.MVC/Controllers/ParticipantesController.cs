@@ -228,8 +228,14 @@ namespace Facilis.MVC.Controllers
 
             var participanteViewModel = Mapper.Map<IEnumerable<Participante>, IEnumerable<ParticipanteViewModel>>(lista);
 
-            if (lista.Count > 0)
+            if (lista.Count == 0)
+            {
+                ViewBag.Mensagem = "Nenhum inscrito com presença confirmada até o momento.";
+            }
+            else
+            {
                 ViewBag.Evento = participanteViewModel.Select(f => f.Evento.Nome).First();
+            }
 
             return new PdfActionResult("ListaParticipantes", participanteViewModel);
         }
