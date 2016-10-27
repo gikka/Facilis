@@ -1,7 +1,7 @@
 ﻿@model Facilis.MVC.ViewModels.EventoViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Excluir evento";
 }
 
 <h2>Excluir evento</h2>
@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataInicial)
+            @String.Format("{0:dd/MM/yyyy}", Model.DataInicial)
         </dd>
 
         <dt>
@@ -39,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataFinal)
+            @String.Format("{0:dd/MM/yyyy}", Model.DataFinal)
         </dd>
 
         <dt>

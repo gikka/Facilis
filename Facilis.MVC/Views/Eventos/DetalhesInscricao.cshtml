@@ -1,11 +1,27 @@
 ﻿@model Facilis.MVC.ViewModels.EventoViewModel
 
 @{
-    ViewBag.Title = "DetalhesInscricao";
+    ViewBag.Title = "Detalhes do evento";
 }
-<div>
-    <h2>@Html.DisplayFor(model => model.Nome)</h2>
-    <p>@(String.Format("{0:dd/MM/yyyy}, {1} - {2:dd/MM/yyyy}, {3}", Model.DataInicial, Model.HoraInicial, Model.DataFinal, Model.HoraFinal))</p>
+<div class="form-group row">
+    <div class="col-md-8">
+        <h2>@Html.DisplayFor(model => model.Nome)</h2>
+        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        @(String.Format("{0:dddd, dd} de {0:MMMM} de {0:yyyy}, {1} - {2:dddd, dd} de {2:MMMM} de {2:yyyy}, {3}", Model.DataInicial, Model.HoraInicial, Model.DataFinal, Model.HoraFinal))
+        </p>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default fixed" style="display: block; width: 351px; left: 857.5px; position: fixed; z-index: 10000; margin-top: 20px;">
+            <div class="panel-heading">Inscreva-se</div>
+            <div class="panel-body">
+                <p><b>Tipo do evento: </b>@Html.DisplayFor(model => model.TipoEvento)</p>
+                <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
+                <hr />
+                @Html.ActionLink("Realizar Inscrição", "Inscricao", "Participantes", new { id = Model.EventoId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
 </div>
 <div>
     <hr />
@@ -14,14 +30,16 @@
 </div>
 <div>
     <hr />
-    <h4><b>@Html.DisplayNameFor(model => model.NomePalestrante)</b></h4>
+    <h4><b>Palestrante/Instrutor</b></h4>
     <p>@Html.DisplayFor(model => model.NomePalestrante)</p>
     <p>@(String.Format("Contato: {0}", Model.EmailPalestrante))</p>
 </div>
+<hr />
+<h4><b>Conteúdo complementar</b></h4>
 <div class="form-group row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>
                 Arquivos
             </div>
             <div class="panel-body">
@@ -33,7 +51,7 @@
 <div class="form-group row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading"><span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                 Vídeos
             </div>
             <div class="panel-body">
@@ -42,19 +60,5 @@
         </div>
     </div>
 </div>
-@foreach (var item in Model.Videos)
-{
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src=@item.URL></iframe>
-    </div>
-}
 
-<div>
-    <h3>Inscreva-se</h3>
-    <p><b>Tipo do evento: </b>@Html.DisplayFor(model => model.TipoEvento)</p>
-    <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
-    <p>@Html.ActionLink("Realizar Inscrição", "Inscricao", "Participantes", new { id = Model.EventoId }, new { htmlAttributes = new { @class = "btn btn-primary btn-lg" } })</p>
-</div>
-<p>
-    @Html.ActionLink("Voltar", "Index", "Home")
-</p>
+

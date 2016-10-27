@@ -1,7 +1,7 @@
 ﻿@model Facilis.MVC.ViewModels.EventoViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes do evento";
 }
 
 <h2>Detalhes evento</h2>
@@ -22,7 +22,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataInicial)
+            @String.Format("{0:dd/MM/yyyy}", Model.DataInicial)
         </dd>
 
         <dt>
@@ -38,7 +38,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataFinal)
+            @String.Format("{0:dd/MM/yyyy}", Model.DataFinal)
         </dd>
 
         <dt>

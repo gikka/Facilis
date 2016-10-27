@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Facilis.MVC.ViewModels.ParticipanteViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Minhas inscrições";
 }
 
 <h2>Minhas Inscrições</h2>
@@ -29,8 +29,7 @@
             @Html.DisplayFor(modelItem => item.Evento.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Evento.DataInicial)
-            @Html.DisplayFor(modelItem => item.Evento.HoraInicial)
+            @String.Format("{0:dd/MM/yyyy} {1}", item.Evento.DataInicial, item.Evento.HoraInicial)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DataInscricao)
