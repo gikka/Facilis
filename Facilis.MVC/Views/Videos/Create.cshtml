@@ -1,7 +1,7 @@
 ﻿@model Facilis.MVC.ViewModels.VideoViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Novo vídeo";
 }
 
 <h2>Novo Vídeo</h2>
@@ -17,7 +17,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
                 @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })

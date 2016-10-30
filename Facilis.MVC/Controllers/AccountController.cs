@@ -11,6 +11,7 @@ using Facilis.Application.Interface;
 using Facilis.Domain.Entities;
 using System.Collections.Generic;
 using AutoMapper;
+using System;
 
 namespace Facilis.MVC.Controllers
 {
@@ -149,6 +150,10 @@ namespace Facilis.MVC.Controllers
 
             var user = _userManager.FindById(id);
             var usuarioViewModel = Mapper.Map<Usuario, RegisterViewModel>(user.usuario);
+            ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", user.usuario.EstadoId);
+            ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(user.usuario.EstadoId).ToList(), "CidadeId", "Nome", user.usuario.CidadeId);
+            CarregarDropDownSexo();
+
             return View(usuarioViewModel);
         }
 
@@ -185,7 +190,10 @@ namespace Facilis.MVC.Controllers
                 //para permitir relacionamento de usuario com outras entidades
                 user.usuario.Id = user.Id;
 
-                var result = await _userManager.CreateAsync(user, model.Senha);
+                _userManager.ChangePhoneNumber(user.Id, user.usuario.Telefone.ToString(), null);
+
+                var result = await _userManager.UpdateAsync(user);
+
 
                 if (result.Succeeded)
                 {
@@ -197,7 +205,7 @@ namespace Facilis.MVC.Controllers
                 ViewBag.EstadoId = new SelectList(_estadoApp.GetAll().OrderBy(e => e.Nome), "EstadoId", "Nome", model.EstadoId);
                 ViewBag.CidadeId = new SelectList(_cidadeApp.ListarPorEstado(model.EstadoId).ToList(), "CidadeId", "Nome", model.CidadeId);
                 CarregarDropDownSexo();
-                AddErrors(result);
+                //AddErrors(result);
 
 
             }

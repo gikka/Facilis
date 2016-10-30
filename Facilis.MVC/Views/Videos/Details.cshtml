@@ -1,15 +1,21 @@
 ﻿@model Facilis.MVC.ViewModels.VideoViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
+<h2>Detalhes vídeo</h2>
 
 <div>
-    <h4>VideoViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.URL)
         </dt>
@@ -18,17 +24,14 @@
             @Html.DisplayFor(model => model.URL)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventoId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventoId)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.VideoId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Ver vídeo", "Download", new { id = Model.VideoId }, new { target = "_blank" })
 </p>
+<div class="form-group row">
+    <div class="col-md-12">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.VideoId  }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Voltar", "Edit", "Eventos", new { id = Model.EventoId }, new { @class = "btn btn-default" })
+    </div>
+</div>

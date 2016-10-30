@@ -6,15 +6,16 @@
 <div class="form-group row">
     <div class="col-md-8">
         <h2>@Html.DisplayFor(model => model.Nome)</h2>
-        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        @(String.Format("{0:dddd, dd} de {0:MMMM} de {0:yyyy}, {1} - {2:dddd, dd} de {2:MMMM} de {2:yyyy}, {3}", Model.DataInicial, Model.HoraInicial, Model.DataFinal, Model.HoraFinal))
+        <p>
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            @(String.Format("{0:dddd, dd} de {0:MMMM} de {0:yyyy}, {1} - {2:dddd, dd} de {2:MMMM} de {2:yyyy}, {3}", Model.DataInicial, Model.HoraInicial, Model.DataFinal, Model.HoraFinal))
         </p>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default fixed" style="display: block; width: 351px; left: 857.5px; position: fixed; z-index: 10000; margin-top: 20px;">
             <div class="panel-heading">Inscreva-se</div>
             <div class="panel-body">
-                <p><b>Tipo do evento: </b>@Html.DisplayFor(model => model.TipoEvento)</p>
+                <p><b>Tipo do evento: </b>@(Model.TipoEvento == 2 ? "Pago" : "Gratuito")</ p >
                 <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
                 <hr />
                 @Html.ActionLink("Realizar Inscrição", "Inscricao", "Participantes", new { id = Model.EventoId }, new { @class = "btn btn-primary" })
@@ -36,10 +37,13 @@
 </div>
 <hr />
 <h4><b>Conteúdo complementar</b></h4>
+
+
 <div class="form-group row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
                 Arquivos
             </div>
             <div class="panel-body">
@@ -51,14 +55,17 @@
 <div class="form-group row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                 Vídeos
             </div>
             <div class="panel-body">
-                @Html.Partial("~/Views/Videos/Index.cshtml", Model.Videos)
+                @Html.Partial("~/Views/Videos/IndexDetalhes.cshtml", Model.Videos, new ViewDataDictionary { { "id", Model.EventoId.ToString() } })
             </div>
         </div>
     </div>
+
 </div>
+
 
 

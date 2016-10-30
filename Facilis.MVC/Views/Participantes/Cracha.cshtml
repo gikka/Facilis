@@ -3,10 +3,9 @@
 @{
     Layout = "~/Views/Shared/_LayoutPdf.cshtml";
 }
-
-<h2>Cracha</h2>
-<h3>@Model.Evento.Nome</h3>
-<hr />
-<h2>@Model.Usuario.Nome</h2>
-<h4>@Model.Usuario.Sobrenome</h4>
-
+<div style="margin-left: 0px; margin-right: 0px; border: 2px solid #ddd;">
+    <h3 style="margin: 0px">@Model.Evento.Nome</h3>
+    <hr />
+    <h2 style="margin-bottom: 0px; text-align: center; font-size: 35px">@Model.Usuario.Nome</h2>
+    <h4 style="margin-top: 0px; text-align: center; font-size: 25px">@Model.Usuario.Sobrenome</h4>
+</div>

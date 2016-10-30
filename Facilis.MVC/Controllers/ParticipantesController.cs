@@ -207,7 +207,11 @@ namespace Facilis.MVC.Controllers
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
 
-            return new PdfActionResult("Cracha", participanteViewModel);
+            return new PdfActionResult("Cracha", participanteViewModel, (writer, document) =>
+            {
+                document.SetPageSize(new Rectangle(300f, 400f, 90));
+                document.NewPage();
+            });
         }
 
         public ActionResult Certificado(int id)

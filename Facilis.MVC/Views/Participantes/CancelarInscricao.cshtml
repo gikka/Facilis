@@ -1,7 +1,7 @@
 ﻿@model Facilis.MVC.ViewModels.ParticipanteViewModel
 
 @{
-    ViewBag.Title = "Cancelamento da inscrição";
+    ViewBag.Title = "Cancelar inscrição";
 }
 
 <h2>Cancelar Inscrição</h2>
@@ -31,7 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataInscricao)
+            @String.Format("{0:dd/MM/yyyy}", Model.DataInscricao)
         </dd>
     </dl>
     @using (Html.BeginForm()) {

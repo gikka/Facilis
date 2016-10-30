@@ -38,8 +38,12 @@
             @Html.DisplayFor(modelItem => item.DataCancelamento)
         </td>
         <td>
-            @Html.ActionLink("Ver evento", "DetalhesInscricao", "Eventos", new { id = item.EventoId }, null) |
-            @Html.ActionLink("Cancelar inscrição", "CancelarInscricao", new { id=item.ParticipanteId }) 
+            <a href="@Url.Action("DetalhesInscricao", "Eventos", new { id = item.EventoId })" , class="btn btn-info" data-toggle="tooltip" data-placement="auto" title="Ver evento">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </a>
+            <a href="@Url.Action("CancelarInscricao", new { id = item.ParticipanteId })" , class="btn btn-danger" data-toggle="tooltip" data-placement="auto" title="Cancelar Inscrição">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
         </td>
     </tr>
 }

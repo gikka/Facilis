@@ -67,7 +67,7 @@ namespace Facilis.MVC.Controllers
         {
             var video = _videoApp.GetById(id);
             var videoViewModel = Mapper.Map<Video, VideoViewModel>(video);
-
+            ViewBag.EventoId = video.EventoId;
             return View(videoViewModel);
         }
 
@@ -93,7 +93,7 @@ namespace Facilis.MVC.Controllers
 
             var video = _videoApp.GetById(id);
             var videoViewModel = Mapper.Map<Video, VideoViewModel>(video);
-
+            ViewBag.EventoId = video.EventoId;
             return View(videoViewModel);
         }
 
@@ -108,5 +108,6 @@ namespace Facilis.MVC.Controllers
             return RedirectToAction("Edit", "Eventos", new { id = video.EventoId });
 
         }
+
     }
 }

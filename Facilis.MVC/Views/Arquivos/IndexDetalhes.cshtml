@@ -21,7 +21,9 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.ActionLink("Ver arquivo", "Download", "Arquivos", new { id = item.ArquivoId }, new { target = "_blank" })
+                <a href="@Url.Action("Download", "Arquivos", new { id = item.ArquivoId })" , class="btn btn-success" data-toggle="tooltip" data-placement="auto" title="Ver arquivo" target="_blank">
+                    <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                </a>
             </td>
         </tr>
     }

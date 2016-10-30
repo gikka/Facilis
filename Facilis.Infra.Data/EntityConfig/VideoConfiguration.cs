@@ -14,6 +14,10 @@ namespace Facilis.Infra.Data.EntityConfig
         {
             HasKey(v => v.VideoId);
 
+            Property(a => a.Titulo)
+                .IsRequired()
+                .HasMaxLength(100);
+
             Property(v => v.URL)
                 .IsRequired()
                 .HasMaxLength(1000);

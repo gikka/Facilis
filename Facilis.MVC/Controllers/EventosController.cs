@@ -125,7 +125,6 @@ namespace Facilis.MVC.Controllers
             var evento = _eventoApp.GetById(id);
             evento.Arquivos = _arquivoApp.ListarPorEvento(id);
             evento.Videos = _videoApp.ListarPorEvento(id);
-
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
 
             return View(eventoViewModel);
