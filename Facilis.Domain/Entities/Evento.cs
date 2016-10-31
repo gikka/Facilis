@@ -22,5 +22,6 @@ namespace Facilis.Domain.Entities
         public virtual IEnumerable<Arquivo> Arquivos { get; set; }
         public virtual IEnumerable<Video> Videos { get; set; }
         public virtual IEnumerable<Participante> Participantes { get; set; }
+        public DateTime? DataCancelamento { get; set; }
     }
 }

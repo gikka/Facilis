@@ -9,8 +9,11 @@ using Microsoft.AspNet.Identity;
 using MvcRazorToPdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace Facilis.MVC.Controllers
 {
@@ -100,7 +103,7 @@ namespace Facilis.MVC.Controllers
 
                 //enviar e-mail confirmando que a inscrição for realizada
                 var assunto = "Inscrição confirmada";
-                var mensagem = string.Format("Sua inscrição no evento {0} em {1} {2} foi realizada com sucesso!", evento.Nome, evento.DataInicial, evento.HoraInicial);
+                var mensagem = string.Format("Sua inscrição no evento {0} em {1:dd/MM/yyyy} {2} foi realizada com sucesso!", evento.Nome, evento.DataInicial, evento.HoraInicial);
                 var destinatario = new List<string>();
                 destinatario.Add(usuario.Email);
 
@@ -220,12 +223,47 @@ namespace Facilis.MVC.Controllers
         {
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
+            var html = new StringBuilder();
 
-            return new PdfActionResult("Certificado", participanteViewModel, (writer, document) =>
+            html.Append("div class='container'>");
+            html.Append("<div class='borda-certificado'>");
+            html.Append("<h1 class='titulo-certificado'>Certificado de Participação</h1>");
+            html.Append("<hr />");
+            html.AppendFormat("<h2 class='usuario'>{0} {1}</h2>", participante.Usuario.Nome, participante.Usuario.Sobrenome);
+            html.Append("<h3 class='evento'>");
+            html.Append("");
+            html.Append("");
+            html.Append("");
+            html.Append("</h3>");
+            html.Append("</div>");
+            html.Append("</div>");
+
+            var css = ".titulo-certificado {margin: 40px 0 0;border-bottom: 1px solid #eeeeee;text-align: center;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 500; font-size: 70px;  }";
+
+
+            return new PdfActionResult(participante, (writer, document) =>
             {
-                document.SetPageSize(new Rectangle(1000f, 500f, 90));
+                document.Open();
+                document.SetPageSize(PageSize.A4);
                 document.NewPage();
+                //Image imagemFundo = Image.GetInstance(Server.MapPath(@"..\..\fonts\Icones\bonito.png"));
+                //imagemFundo.ScaleAbsolute(PageSize.A4);
+               // imagemFundo.SetAbsolutePosition(0, 0);
+                //document.Add(imagemFundo);
+
+                using (var msCss = new MemoryStream(Encoding.UTF8.GetBytes(css)))
+                {
+                    using (var msHtml = new MemoryStream(Encoding.UTF8.GetBytes(html.ToString())))
+                    {
+                        iTextSharp.tool.xml.XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, msHtml, msCss);
+                    }
+                }
+                document.Close();
             });
+
+
+            //document.SetPageSize(new Rectangle(1000f, 500f, 90));
+
         }
 
         public ActionResult ImprimirListaPresenca(int id)

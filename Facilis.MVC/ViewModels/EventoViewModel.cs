@@ -71,6 +71,13 @@ namespace Facilis.MVC.ViewModels
         public virtual IEnumerable<ArquivoViewModel> Arquivos { get; set; }
         public virtual IEnumerable<VideoViewModel> Videos { get; set; }
 
+        [Display(Name = "Data cancelamento")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataCancelamento { get; set; }
+
         public string DescricaoCurta { get { return Descricao.Length <= 100 ? Descricao : Descricao.Substring(0, 100) + "..."; } }
+        public int VagasUtilizadas { get; set; }
+      
     }
 }

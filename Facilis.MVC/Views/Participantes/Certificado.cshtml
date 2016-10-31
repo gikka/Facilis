@@ -6,9 +6,15 @@
 }
 
 <div class="container">
-    <h1 class="titulo-certificado" >Certificado de Participação</h1>
-    <hr />
-    <h2 class="usuario">@Model.Usuario.Nome @Model.Usuario.Sobrenome</h2>
-    <h3 class="evento">Participou do @Model.Evento.Nome</h3>
-    <h3 class="evento">em @Model.Evento.DataInicial.ToString("dd/MM/yyyy") das @Model.Evento.HoraInicial até @Model.Evento.DataFinal.ToString("dd/MM/yyyy") às @Model.Evento.HoraFinal</h3>
+    <div class="borda-certificado">
+        <h1 class="titulo-certificado">Certificado de Participação</h1>
+        <hr />
+        <h2 class="usuario">@Model.Usuario.Nome @Model.Usuario.Sobrenome</h2>
+        <h3 class="evento">
+            Participou de @Model.Evento.Nome
+            em @Model.Evento.DataInicial.ToString("dd/MM/yyyy")
+            das @Model.Evento.HoraInicial
+            até @Model.Evento.DataFinal.ToString("dd/MM/yyyy") às @Model.Evento.HoraFinal
+        </h3>
+    </div>
 </div>

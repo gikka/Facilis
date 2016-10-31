@@ -33,6 +33,7 @@ namespace Facilis.MVC.Controllers
             var listaEventos = _eventoApp.ListarPorUsuario(User.Identity.GetUserId());
             var eventoViewModel = Mapper.Map<IEnumerable<Evento>, IEnumerable<EventoViewModel>>(listaEventos);
 
+            eventoViewModel.Each(e => e.VagasUtilizadas = _participanteApp.ContarVagasUtilizadas(e.EventoId));
             return View(eventoViewModel);
         }
 
@@ -44,6 +45,8 @@ namespace Facilis.MVC.Controllers
             evento.Arquivos = _arquivoApp.ListarPorEvento(id);
             evento.Videos = _videoApp.ListarPorEvento(id);
             var eventoViewModel = Mapper.Map<Evento, EventoViewModel>(evento);
+
+            eventoViewModel.VagasUtilizadas = _participanteApp.ContarVagasUtilizadas(id);
 
             return View(eventoViewModel);
         }

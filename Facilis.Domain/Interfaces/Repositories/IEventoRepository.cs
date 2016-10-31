@@ -6,6 +6,7 @@ namespace Facilis.Domain.Interfaces.Repositories
     public interface IEventoRepository : IRepositoryBase<Evento>
     {
         IEnumerable<Evento> ListarPorUsuario(string usuarioId);
+        IEnumerable<Evento> ListarPagosPorUsuario(string usuarioId);
         IEnumerable<Evento> ListarProximos();
     }
 }

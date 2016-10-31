@@ -6,9 +6,6 @@
 
 <h2>Meus Eventos</h2>
 
-<p>
-    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-primary" })
-</p>
 <table class="table table-hover">
     <tr>
         <th>
@@ -23,7 +20,11 @@
         <th>
             @Html.DisplayName("Vagas")
         </th>
-        <th></th>
+        <th style="text-align: center">
+            <a href="@Url.Action("Create")" class="btn btn-primary" data-toggle="tooltip" data-placement="auto" title="Novo evento">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -39,7 +40,7 @@
                 @String.Format("{0:dd/MM/yyyy} {1}", item.DataFinal, item.HoraFinal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantidadeVagas)
+                @String.Format("{0}/{1}", item.VagasUtilizadas ,item.QuantidadeVagas)
             </td>
             <td>
                 <a href="@Url.Action("Edit", new { id = item.EventoId })" class="btn btn-primary" data-toggle="tooltip" data-placement="auto" title="Alterar">

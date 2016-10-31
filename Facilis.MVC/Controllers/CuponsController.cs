@@ -122,11 +122,11 @@ namespace Facilis.MVC.Controllers
         {
             if (id == null)
             {
-                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome");
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPagosPorUsuario(User.Identity.GetUserId()), "EventoId", "Nome");
             }
             else
             {
-                ViewBag.EventoList = new SelectList(_eventoApp.ListarPorUsuario(User.Identity.GetUserId()).OrderBy(e => e.Nome), "EventoId", "Nome", id);
+                ViewBag.EventoList = new SelectList(_eventoApp.ListarPagosPorUsuario(User.Identity.GetUserId()), "EventoId", "Nome", id);
             }
             
         }

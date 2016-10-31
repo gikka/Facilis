@@ -15,7 +15,12 @@ namespace Facilis.Infra.Data.Repositories
 
         public IEnumerable<Evento> ListarProximos()
         {
-            return Db.Eventos.Where(e => e.DataFinal.CompareTo(DateTime.Now) >= 0);
+            return Db.Eventos.Where(e => e.DataFinal.CompareTo(DateTime.Now) >= 0 && e.DataCancelamento == null);
+        }
+
+        public IEnumerable<Evento> ListarPagosPorUsuario(string usuarioId)
+        {
+            return Db.Eventos.Where(e => e.UsuarioId == usuarioId && e.DataCancelamento == null && e.TipoEvento == 2).OrderBy(e => e.Nome);
         }
     }
 }

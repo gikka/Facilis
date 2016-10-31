@@ -24,5 +24,10 @@ namespace Facilis.Domain.Services
         {
             return _eventoRepository.ListarProximos();
         }
+
+        public IEnumerable<Evento> ListarPagosPorUsuario(string usuarioId)
+        {
+            return _eventoRepository.ListarPagosPorUsuario(usuarioId);
+        }
     }
 }
