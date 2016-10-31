@@ -16,7 +16,7 @@
             <div class="panel-heading">Inscreva-se</div>
             <div class="panel-body">
                 <p><b>Tipo do evento: </b>@(Model.TipoEvento == 2 ? "Pago" : "Gratuito")</ p >
-                <p><b>Vagas:</b> @Html.DisplayFor(model => model.QuantidadeVagas)</p>
+                <p><b>Vagas:</b> @String.Format("{0}/{1}", ViewBag.VagasUtilizadas, @Html.DisplayFor(model => model.QuantidadeVagas))</p>
                 <hr />
                 @Html.ActionLink("Realizar Inscrição", "Inscricao", "Participantes", new { id = Model.EventoId }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("Voltar", "Index", "Home", null, new { @class = "btn btn-default" })

@@ -24,6 +24,11 @@ namespace Facilis.Application
             return _participanteService.ListarInscritosPorEvento(eventoId);
         }
 
+        public IEnumerable<Participante> ListarInscritosAtivosPorEvento(int eventoId)
+        {
+            return _participanteService.ListarInscritosAtivosPorEvento(eventoId);
+        }
+
         public void MarcarPresenca(int id)
         {
             _participanteService.MarcarPresenca(id);
@@ -37,6 +42,16 @@ namespace Facilis.Application
         public IEnumerable<Participante> ContarPorSexo(int eventoId)
         {
             return _participanteService.ContarPorSexo(eventoId);
+        }
+
+        public int ContarVagasUtilizadas(int eventoId)
+        {
+            return _participanteService.ContarVagasUtilizadas(eventoId);
+        }
+
+        public int ContarInscritos(int eventoId)
+        {
+            return _participanteService.ContarInscritos(eventoId);
         }
     }
 }

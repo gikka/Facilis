@@ -17,6 +17,11 @@ namespace Facilis.Infra.Data.Repositories
             return Db.Participantes.Where(p => p.EventoId == eventoId).OrderBy(p => p.Usuario.Nome);
         }
 
+        public IEnumerable<Participante> ListarInscritosAtivosPorEvento(int eventoId)
+        {
+            return Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).OrderBy(p => p.Usuario.Nome);
+        }
+
         public void MarcarPresenca(int id)
         {
             Db.Participantes.Find(id).Presenca = true;
@@ -33,6 +38,19 @@ namespace Facilis.Infra.Data.Repositories
             var lista = Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null);
 
             return lista;
+        }
+
+        public int ContarVagasUtilizadas(int eventoId)
+        {
+            var quantidade = Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).Count();
+
+            return quantidade;
+        }
+
+        public int ContarInscritos(int eventoId)
+        {
+            var quantidade = Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).Count();
+            return quantidade;
         }
     }
 }

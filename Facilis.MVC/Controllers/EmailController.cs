@@ -45,7 +45,7 @@ namespace Facilis.MVC.Controllers
                 var assunto = model.Assunto.Trim();
                 var mensagem = model.HtmlContent.Trim();
 
-                var inscritos = _participanteApp.ListarInscritosPorEvento(model.EventoId).Where(p => p.DataCancelamento == null).ToList();
+                var inscritos = _participanteApp.ListarInscritosAtivosPorEvento(model.EventoId);
 
                 var destinatarios = new List<string>();
                 destinatarios = (from i in inscritos

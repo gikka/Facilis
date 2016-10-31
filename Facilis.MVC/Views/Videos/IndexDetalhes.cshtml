@@ -3,6 +3,9 @@
 <table class="table table-hover">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.URL)
         </th>
         <th></th>
@@ -11,6 +14,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.URL)
             </td>

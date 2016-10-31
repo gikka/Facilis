@@ -128,6 +128,8 @@ namespace Facilis.MVC.Controllers
         {
             var participante = _participanteApp.GetById(id);
 
+            //TODO: O sistema deve permitir que os participantes efetuem o cancelamento da inscrição até a data do evento
+            //TODO: comparar com a data do evento
             participante.DataCancelamento = DateTime.Now;
             _participanteApp.Update(participante);
 
