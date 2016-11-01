@@ -5,9 +5,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Titulo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.URL)
-        </th>
         <th></th>
     </tr>
 
@@ -18,11 +15,8 @@
                 @Html.DisplayFor(modelItem => item.Titulo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.URL)
-            </td>
-            <td>
-                <a href="@Url.Action("Download", "Videos", new { id = item.VideoId })" , class="btn btn-success" data-toggle="tooltip" data-placement="auto" title="Ver vídeo" target="_blank">
-                    <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                <a href="@item.URL" class="btn btn-success" data-toggle="tooltip" data-placement="auto" title="Ver vídeo" target="_blank">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
             </td>
         </tr>

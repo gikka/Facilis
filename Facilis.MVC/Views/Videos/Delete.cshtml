@@ -31,7 +31,9 @@
     {
         @Html.AntiForgeryToken()
         <p>
-            @Html.ActionLink("Ver vídeo", "Download", new { id = Model.VideoId }, new { target = "_blank" })
+            <a href="@Model.URL" class="btn-link" data-toggle="tooltip" data-placement="auto" title="Ver vídeo" target="_blank">
+                Ver vídeo
+            </a>
         </p>
         <div class="form-group row">
             <div class="col-md-12">
