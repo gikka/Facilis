@@ -52,5 +52,18 @@ namespace Facilis.Infra.Data.Repositories
             var quantidade = Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).Count();
             return quantidade;
         }
+
+        public void RegistrarEmissaoCracha(int id)
+        {
+            Db.Participantes.Find(id).Cracha = true;
+            Db.SaveChanges();
+        }
+
+        public void RegistrarEmissaoCertificado(int id)
+        {
+            Db.Participantes.Find(id).Certificado = true;
+            Db.SaveChanges();
+        }
+
     }
 }

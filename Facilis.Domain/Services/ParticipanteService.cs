@@ -54,5 +54,16 @@ namespace Facilis.Domain.Services
         {
             return _participanteRepository.ContarInscritos(eventoId);
         }
+
+        public void RegistrarEmissaoCracha(int id)
+        {
+            _participanteRepository.RegistrarEmissaoCracha(id);
+        }
+
+        public void RegistrarEmissaoCertificado(int id)
+        {
+            _participanteRepository.RegistrarEmissaoCertificado(id);
+        }
+
     }
 }

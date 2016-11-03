@@ -53,5 +53,16 @@ namespace Facilis.Application
         {
             return _participanteService.ContarInscritos(eventoId);
         }
+
+        public void RegistrarEmissaoCracha(int id)
+        {
+            _participanteService.RegistrarEmissaoCracha(id);
+        }
+
+        public void RegistrarEmissaoCertificado(int id)
+        {
+            _participanteService.RegistrarEmissaoCertificado(id);
+        }
+
     }
 }

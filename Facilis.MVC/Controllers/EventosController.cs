@@ -67,6 +67,7 @@ namespace Facilis.MVC.Controllers
             {
                 var eventoDomain = Mapper.Map<EventoViewModel, Evento>(evento);
                 eventoDomain.UsuarioId = User.Identity.GetUserId();
+                eventoDomain.DataCancelamento = null;
                 _eventoApp.Add(eventoDomain);
 
                 return RedirectToAction("Index");

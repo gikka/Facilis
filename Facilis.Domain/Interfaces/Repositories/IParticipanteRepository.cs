@@ -13,5 +13,7 @@ namespace Facilis.Domain.Interfaces.Repositories
         IEnumerable<Participante> ContarPorSexo(int evendoId);
         int ContarVagasUtilizadas(int eventoId);
         int ContarInscritos(int eventoId);
+        void RegistrarEmissaoCracha(int id);
+        void RegistrarEmissaoCertificado(int id);
     }
 }

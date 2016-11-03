@@ -97,6 +97,9 @@ namespace Facilis.MVC.Controllers
                     return View(participante);
                 }
 
+                //TODO: antes de efetivar a inscrição verificar se o usuario já não está inscrito no evento
+                //TODO: se for utilizar cupom de desconto validar se  o nome do cupom existe, buscar o id e gravar
+
                 participanteDomain.DataInscricao = DateTime.Now;
                 participanteDomain.DataCancelamento = null;
                 _participanteApp.Add(participanteDomain);
@@ -212,6 +215,8 @@ namespace Facilis.MVC.Controllers
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
 
+            _participanteApp.RegistrarEmissaoCracha(id);
+
             return new PdfActionResult("Cracha", participanteViewModel, (writer, document) =>
             {
                 document.SetPageSize(new Rectangle(300f, 400f, 90));
@@ -224,6 +229,8 @@ namespace Facilis.MVC.Controllers
             var participante = _participanteApp.GetById(id);
             var participanteViewModel = Mapper.Map<Participante, ParticipanteViewModel>(participante);
             var html = new StringBuilder();
+
+            _participanteApp.RegistrarEmissaoCertificado(id);
 
             html.Append("div class='container'>");
             html.Append("<div class='borda-certificado'>");
@@ -308,7 +315,7 @@ namespace Facilis.MVC.Controllers
                                          Cidade = new Cidade { Nome = grp.Key.Nome }
                                      },
                                      Quantidade = grp.Count()
-                                 }).OrderBy(f => f.Usuario.Estado.Sigla).OrderBy(f => f.Usuario.Cidade.Nome);
+                                 }).OrderBy(f => f.Usuario.Estado.Sigla).ThenBy(f => f.Usuario.Cidade.Nome);
 
             if (lista.Count > 0)
             {
