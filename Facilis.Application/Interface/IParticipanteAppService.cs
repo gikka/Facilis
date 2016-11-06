@@ -8,6 +8,7 @@ namespace Facilis.Application.Interface
         IEnumerable<Participante> ListarPorUsuario(string usuarioId);
         IEnumerable<Participante> ListarInscritosPorEvento(int eventoId);
         IEnumerable<Participante> ListarInscritosAtivosPorEvento(int eventoId);
+        List<string> ListarEmailsInscritos(int eventoId);
         void MarcarPresenca(int id);
         IEnumerable<Participante> ContarPorRegiao(int eventoId);
         IEnumerable<Participante> ContarPorSexo(int eventoId);

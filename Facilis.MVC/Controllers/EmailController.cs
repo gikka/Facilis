@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Facilis.Application.Interface;
 using Facilis.Domain.Entities;
+using Facilis.Infra.CrossCutting.Identity.Configuration;
 using Facilis.MVC.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace Facilis.MVC.Controllers
     {
         private readonly IEventoAppService _eventoApp;
         private readonly IParticipanteAppService _participanteApp;
+        private ApplicationUserManager _userManager;
 
-        public EmailController(IEventoAppService eventoService, IParticipanteAppService participante)
+        public EmailController(IEventoAppService eventoService, IParticipanteAppService participante, ApplicationUserManager userManager)
         {
             _eventoApp = eventoService;
             _participanteApp = participante;
+            _userManager = userManager;
         }
 
         // GET: TinyMCE
@@ -45,11 +48,14 @@ namespace Facilis.MVC.Controllers
                 var assunto = model.Assunto.Trim();
                 var mensagem = model.HtmlContent.Trim();
 
-                var inscritos = _participanteApp.ListarInscritosAtivosPorEvento(model.EventoId);
+                //var inscritos = _participanteApp.ListarEmailsInscritos(model.EventoId);
 
                 var destinatarios = new List<string>();
-                destinatarios = (from i in inscritos
-                                 select i.Usuario.Email).ToList();
+                destinatarios = _participanteApp.ListarEmailsInscritos(model.EventoId);
+                //foreach(var inscrito in inscritos)
+                //{
+                //    destinatarios.Add(_participanteApp.;
+                //}
 
                 EmailService.SendAsync(assunto, mensagem, destinatarios);
                 ModelState.AddModelError("", "Email enviado com sucesso.");

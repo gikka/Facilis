@@ -69,10 +69,10 @@ namespace Facilis.MVC.Controllers
                 eventoDomain.UsuarioId = User.Identity.GetUserId();
                 eventoDomain.DataCancelamento = null;
                 _eventoApp.Add(eventoDomain);
-
+ 
                 return RedirectToAction("Index");
             }
-
+            CarregarDropDownTipoEvento();
             return View(evento);
         }
 
@@ -99,6 +99,7 @@ namespace Facilis.MVC.Controllers
             {
                 var eventoDomain = Mapper.Map<EventoViewModel, Evento>(evento);
                 eventoDomain.UsuarioId = User.Identity.GetUserId();
+                eventoDomain.DataCancelamento = null;
                 _eventoApp.Update(eventoDomain);
 
                 return RedirectToAction("Index");

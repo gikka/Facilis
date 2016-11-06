@@ -9,12 +9,13 @@
     <div class="borda-certificado">
         <h1 class="titulo-certificado">Certificado de Participação</h1>
         <hr />
+        <h3 class="evento">Certificamos que </h3>
         <h2 class="usuario">@Model.Usuario.Nome @Model.Usuario.Sobrenome</h2>
         <h3 class="evento">
-            Participou de @Model.Evento.Nome
-            em @Model.Evento.DataInicial.ToString("dd/MM/yyyy")
-            das @Model.Evento.HoraInicial
-            até @Model.Evento.DataFinal.ToString("dd/MM/yyyy") às @Model.Evento.HoraFinal
+            Participou com sucesso de <b>@Model.Evento.Nome</b>
+            em <b>@Model.Evento.DataInicial.ToString("dd/MM/yyyy")</b>
+            das <b>@Model.Evento.HoraInicial</b>
+            até <b>@Model.Evento.DataFinal.ToString("dd/MM/yyyy")</b> às <b>@Model.Evento.HoraFinal</b>
         </h3>
     </div>
 </div>

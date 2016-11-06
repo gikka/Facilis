@@ -22,6 +22,12 @@ namespace Facilis.Infra.Data.Repositories
             return Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).OrderBy(p => p.Usuario.Nome);
         }
 
+        public List<string> ListarEmailsInscritos(int eventoId)
+        {
+            return Db.Participantes.Where(p => p.EventoId == eventoId && p.DataCancelamento == null).OrderBy(p => p.Usuario.Nome).Select(p => p.Usuario.Email).ToList();
+        }
+
+
         public void MarcarPresenca(int id)
         {
             Db.Participantes.Find(id).Presenca = true;
